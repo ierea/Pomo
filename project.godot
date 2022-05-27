@@ -11,6 +11,16 @@ config_version=4
 [application]
 
 config/name="Pomo"
+run/main_scene="res://Scenes/Main.tscn"
+
+[display]
+
+window/size/width=640
+window/size/height=640
+
+[global]
+
+build=false
 
 [gui]
 
