@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Fonts/MainTimerFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/AnimatedTimerButton.cs" type="Script" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://Textures/FluentIcons/ic_fluent_pause_24_regular.png" type="Texture" id=6]
 [ext_resource path="res://Textures/Custom/FillTexture.png" type="Texture" id=7]
 [ext_resource path="res://Styles/TimerButtonStyle.tres" type="StyleBox" id=8]
+[ext_resource path="res://Sounds/EponnFreesound/LongBreakStartSfx.wav" type="AudioStream" id=9]
+[ext_resource path="res://Sounds/EponnFreesound/ShortBreakStartSfx.wav" type="AudioStream" id=10]
+[ext_resource path="res://Sounds/EponnFreesound/WorkPhaseStartSfx.wav" type="AudioStream" id=11]
 
 [sub_resource type="Animation" id=5]
 resource_name = "Hovered"
@@ -107,6 +110,7 @@ tracks/0/keys = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
+AudioStreamPlayerNodePath = NodePath("AudioStreamPlayer")
 TimeLabelNodePath = NodePath("CenterContainer/VBoxContainer/TimeLabel")
 PauseButtonNodePath = NodePath("CenterContainer/VBoxContainer/HBoxContainer/PauseButton")
 PauseButtonTextureRectNodePath = NodePath("CenterContainer/VBoxContainer/HBoxContainer/PauseButton/MarginContainer/PauseButtonTextureRect")
@@ -115,6 +119,12 @@ UpperTimerTextureRectNodePath = NodePath("VBoxContainer/UpperTimerTextureRect")
 LowerTimerTextureRectNodePath = NodePath("VBoxContainer/LowerTimerTextureRect")
 PauseTexture = ExtResource( 6 )
 PlayTexture = ExtResource( 5 )
+WorkPhaseStartSfx = ExtResource( 11 )
+ShortBreakPhaseStartSfx = ExtResource( 10 )
+LongBreakPhaseStartSfx = ExtResource( 9 )
+SfxVolume = -5.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_right = 1.0

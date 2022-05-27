@@ -10,6 +10,7 @@ public class PomoTimer : Control
         LongBreak
     }
 
+    [Export] private NodePath AudioStreamPlayerNodePath;
     [Export] private NodePath TimeLabelNodePath;
     [Export] private NodePath PauseButtonNodePath;
     [Export] private NodePath PauseButtonTextureRectNodePath;
@@ -20,10 +21,17 @@ public class PomoTimer : Control
     [Export] private Texture PauseTexture;
     [Export] private Texture PlayTexture;
 
+    [Export] private AudioStream WorkPhaseStartSfx;
+    [Export] private AudioStream ShortBreakPhaseStartSfx;
+    [Export] private AudioStream LongBreakPhaseStartSfx;
+
+    [Export] private float SfxVolume;
+
     private const int SpeedMultiplier = 1;
     private const int MillisecondsInASecond = 1000;
     private const int SecondsInAMinute = 60;
 
+    private AudioStreamPlayer AudioStreamPlayer;
     private Label TimeLabel;
     private Button PauseButton;
     private TextureRect PauseButtonTextureRect;
@@ -56,6 +64,9 @@ public class PomoTimer : Control
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        AudioStreamPlayer = GetNode<AudioStreamPlayer>(AudioStreamPlayerNodePath);
+        AudioStreamPlayer.VolumeDb = SfxVolume;
+
         TimeLabel = GetNode<Label>(TimeLabelNodePath);
         PauseButton = GetNode<Button>(PauseButtonNodePath);
         PauseButtonTextureRect = GetNode<TextureRect>(PauseButtonTextureRectNodePath);
@@ -172,17 +183,26 @@ public class PomoTimer : Control
             case Phase.Work:
             {
                 currentMinutesRemaining = workMinutes;
+
+                AudioStreamPlayer.Stream = WorkPhaseStartSfx;
+                AudioStreamPlayer.Play();
                 break;
             }
             case Phase.ShortBreak:
             {
                 currentMinutesRemaining = shortBreakMinutes;
+
+                AudioStreamPlayer.Stream = ShortBreakPhaseStartSfx;
+                AudioStreamPlayer.Play();
                 break;
             }
             case Phase.LongBreak:
             {
                 currentMinutesRemaining = longBreakMinutes;
                 workPhasesSinceLongBreak = 0;
+
+                AudioStreamPlayer.Stream = LongBreakPhaseStartSfx;
+                AudioStreamPlayer.Play();
                 break;
             }
         }
