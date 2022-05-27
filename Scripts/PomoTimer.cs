@@ -49,6 +49,7 @@ public class PomoTimer : Control
     private int currentSecondsRemaining;
     private float currentMillisecondsRemaining;
     private bool timerActive;
+    private bool freshSessionAndShouldPlaySfxOnPlay;
     private int workPhasesSinceLongBreak;
 
     public PomoTimer()
@@ -58,6 +59,7 @@ public class PomoTimer : Control
         currentSecondsRemaining = 0;
         currentMillisecondsRemaining = MillisecondsInASecond;
         timerActive = false;
+        freshSessionAndShouldPlaySfxOnPlay = true;
         workPhasesSinceLongBreak = 0;
     }
 
@@ -213,6 +215,14 @@ public class PomoTimer : Control
 
     private void OnPauseButtonPressed()
     {
+        if (freshSessionAndShouldPlaySfxOnPlay)
+        {
+            AudioStreamPlayer.Stream = WorkPhaseStartSfx;
+            AudioStreamPlayer.Play();
+
+            freshSessionAndShouldPlaySfxOnPlay = false;
+        }
+        
         if (timerActive)
         {
             PauseButtonTextureRect.Texture = PlayTexture;
@@ -228,6 +238,7 @@ public class PomoTimer : Control
     private void OnResetButtonPressed()
     {
         timerActive = false;
+        freshSessionAndShouldPlaySfxOnPlay = true;
         currentMinutesRemaining = workMinutes;
         currentSecondsRemaining = 0;
         currentMillisecondsRemaining = MillisecondsInASecond;
