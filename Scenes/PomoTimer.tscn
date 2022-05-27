@@ -65,15 +65,13 @@ alignment = 1
 
 [node name="Spacer" type="Control" parent="CenterContainer/VBoxContainer"]
 margin_right = 640.0
-margin_bottom = 227.0
+margin_bottom = 243.0
 size_flags_vertical = 7
 
 [node name="TimeLabel" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_top = 239.0
+margin_top = 243.0
 margin_right = 640.0
-margin_bottom = 328.0
-size_flags_vertical = 6
-size_flags_stretch_ratio = 0.5
+margin_bottom = 332.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = ExtResource( 1 )
 text = "25:00"
@@ -81,29 +79,28 @@ align = 1
 valign = 1
 
 [node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer"]
-margin_top = 341.0
+margin_top = 332.0
 margin_right = 640.0
-margin_bottom = 343.0
-size_flags_vertical = 7
-size_flags_stretch_ratio = 0.01
+margin_bottom = 348.0
+rect_min_size = Vector2( 0, 16 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 343.0
+margin_top = 348.0
 margin_right = 640.0
-margin_bottom = 412.0
-size_flags_vertical = 7
+margin_bottom = 396.0
+size_flags_vertical = 5
 size_flags_stretch_ratio = 0.3
 
 [node name="Spacer" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer"]
-margin_right = 224.0
-margin_bottom = 69.0
+margin_right = 248.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="PauseButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
-margin_left = 228.0
-margin_right = 318.0
-margin_bottom = 69.0
-size_flags_horizontal = 3
+margin_left = 252.0
+margin_right = 300.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
 size_flags_stretch_ratio = 0.4
 flat = true
 
@@ -111,26 +108,32 @@ flat = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
-custom_constants/margin_right = 25
-custom_constants/margin_top = 25
-custom_constants/margin_left = 25
-custom_constants/margin_bottom = 25
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
 
 [node name="PauseButtonTextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/PauseButton/MarginContainer"]
 modulate = Color( 1, 1, 1, 0.47451 )
-margin_left = 25.0
-margin_top = 25.0
-margin_right = 65.0
-margin_bottom = 44.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 40.0
+margin_bottom = 40.0
 texture = ExtResource( 5 )
 expand = true
 stretch_mode = 6
 
+[node name="Spacer3" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+margin_left = 304.0
+margin_right = 336.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 32, 0 )
+
 [node name="ResetButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
-margin_left = 322.0
-margin_right = 411.0
-margin_bottom = 69.0
-size_flags_horizontal = 3
+margin_left = 340.0
+margin_right = 388.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
 size_flags_stretch_ratio = 0.4
 flat = true
 
@@ -138,29 +141,30 @@ flat = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
-custom_constants/margin_right = 25
-custom_constants/margin_top = 25
-custom_constants/margin_left = 25
-custom_constants/margin_bottom = 25
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/ResetButton/MarginContainer"]
+[node name="ResetButtonTextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/ResetButton/MarginContainer"]
 modulate = Color( 1, 1, 1, 0.47451 )
-margin_left = 25.0
-margin_top = 25.0
-margin_right = 64.0
-margin_bottom = 44.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 44, 34 )
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
 
 [node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer/HBoxContainer"]
-margin_left = 415.0
+margin_left = 392.0
 margin_right = 640.0
-margin_bottom = 69.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="Spacer3" type="Control" parent="CenterContainer/VBoxContainer"]
-margin_top = 412.0
+margin_top = 396.0
 margin_right = 640.0
 margin_bottom = 640.0
 size_flags_vertical = 7
