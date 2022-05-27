@@ -20,8 +20,8 @@ config/windows_native_icon="res://Textures/FluentIcons/ic_fluent_timer_24_regula
 
 [display]
 
-window/size/width=640
-window/size/height=640
+window/size/width=480
+window/size/height=480
 
 [global]
 
