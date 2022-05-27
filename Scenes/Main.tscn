@@ -5,6 +5,6 @@
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
-MinimumWindowSize = Vector2( 240, 200 )
+MinimumWindowSize = Vector2( 240, 240 )
 
 [node name="PomoTimer" parent="." instance=ExtResource( 2 )]
