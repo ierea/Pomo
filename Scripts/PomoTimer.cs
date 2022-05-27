@@ -118,18 +118,18 @@ public class PomoTimer : Control
             }
             case Phase.ShortBreak:
             {
-                int totalShortBreakSeconds = shortBreakMinutes * SecondsInAMinute * MillisecondsInASecond;
+                int totalShortBreakMilliseconds = shortBreakMinutes * SecondsInAMinute * MillisecondsInASecond;
 
-                UpperTimerTextureRect.SizeFlagsStretchRatio = millisecondsRemaining / totalShortBreakSeconds;
-                LowerTimerTextureRect.SizeFlagsStretchRatio = 1.0f - millisecondsRemaining / totalShortBreakSeconds;
+                UpperTimerTextureRect.SizeFlagsStretchRatio = millisecondsRemaining / totalShortBreakMilliseconds;
+                LowerTimerTextureRect.SizeFlagsStretchRatio = 1.0f - millisecondsRemaining / totalShortBreakMilliseconds;
                 break;
             }
             case Phase.LongBreak:
             {
-                int totalLongBreakSeconds = longBreakMinutes * SecondsInAMinute * MillisecondsInASecond;
+                int totalLongBreakMilliseconds = longBreakMinutes * SecondsInAMinute * MillisecondsInASecond;
 
-                UpperTimerTextureRect.SizeFlagsStretchRatio = millisecondsRemaining / totalLongBreakSeconds;
-                LowerTimerTextureRect.SizeFlagsStretchRatio = 1.0f - millisecondsRemaining / totalLongBreakSeconds;
+                UpperTimerTextureRect.SizeFlagsStretchRatio = millisecondsRemaining / totalLongBreakMilliseconds;
+                LowerTimerTextureRect.SizeFlagsStretchRatio = 1.0f - millisecondsRemaining / totalLongBreakMilliseconds;
                 break;
             }
         }
