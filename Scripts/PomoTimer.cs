@@ -17,9 +17,12 @@ public class PomoTimer : Control
     [Export] private NodePath ResetButtonNodePath;
     [Export] private NodePath UpperTimerTextureRectNodePath;
     [Export] private NodePath LowerTimerTextureRectNodePath;
+    [Export] private NodePath PinWindowButtonTextureRectNodePath;
 
     [Export] private Texture PauseTexture;
     [Export] private Texture PlayTexture;
+    [Export] private Texture PinWindowTexture;
+    [Export] private Texture UnpinWindowTexture;
 
     [Export] private AudioStream WorkPhaseStartSfx;
     [Export] private AudioStream ShortBreakPhaseStartSfx;
@@ -38,6 +41,7 @@ public class PomoTimer : Control
     private Button ResetButton;
     private TextureRect UpperTimerTextureRect;
     private TextureRect LowerTimerTextureRect;
+    private TextureRect PinWindowButtonTextureRect;
 
     private int workPhasesPerLongBreak = 5;
     private int workMinutes = 25;
@@ -75,6 +79,7 @@ public class PomoTimer : Control
         ResetButton = GetNode<Button>(ResetButtonNodePath);
         UpperTimerTextureRect = GetNode<TextureRect>(UpperTimerTextureRectNodePath);
         LowerTimerTextureRect = GetNode<TextureRect>(LowerTimerTextureRectNodePath);
+        PinWindowButtonTextureRect = GetNode<TextureRect>(PinWindowButtonTextureRectNodePath);
 
         UpdateTimerText();
         UpdateTimerTextures();
@@ -249,5 +254,21 @@ public class PomoTimer : Control
 
         UpdateTimerText();
         UpdateTimerTextures();
+    }
+
+    private void OnPinWindowButtonPressed()
+    {
+        bool isCurrentlyAlwaysOnTop = OS.IsWindowAlwaysOnTop();
+
+        if (isCurrentlyAlwaysOnTop)
+        {
+            PinWindowButtonTextureRect.Texture = PinWindowTexture;
+            OS.SetWindowAlwaysOnTop(false);
+        }
+        else
+        {
+            PinWindowButtonTextureRect.Texture = UnpinWindowTexture;
+            OS.SetWindowAlwaysOnTop(true);
+        }
     }
 }
