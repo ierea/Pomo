@@ -12,6 +12,7 @@ config_version=4
 
 config/name="Pomo"
 run/main_scene="res://Scenes/Main.tscn"
+run/low_processor_mode=true
 
 [display]
 
