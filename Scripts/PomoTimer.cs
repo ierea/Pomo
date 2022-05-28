@@ -63,7 +63,7 @@ public class PomoTimer : Control
     private TextureRect UpperTimerTextureRect;
     private TextureRect LowerTimerTextureRect;
     private TextureRect PinWindowButtonTextureRect;
-    private Control OptionsPopup;
+    private OptionsPopup OptionsPopup;
     private ColorPickerButton OptionsTimerUpperColorPickerButton;
     private ColorPickerButton OptionsTimerLowerColorPickerButton;
     private TextureRect OptionsTimerUpperColorPickerTextureRect;
@@ -109,8 +109,7 @@ public class PomoTimer : Control
 
         PinWindowButtonTextureRect = GetNode<TextureRect>(PinWindowButtonTextureRectNodePath);
 
-        OptionsPopup = GetNode<Control>(OptionsPopupNodePath);
-        OptionsPopup.Visible = false;
+        OptionsPopup = GetNode<OptionsPopup>(OptionsPopupNodePath);
 
         OptionsTimerUpperColorPickerButton = GetNode<ColorPickerButton>(OptionsUpperTimerColorPickerButtonNodePath);
         OptionsTimerLowerColorPickerButton = GetNode<ColorPickerButton>(OptionsLowerTimerColorPickerButtonNodePath);
@@ -156,6 +155,7 @@ public class PomoTimer : Control
             UpdateTimerText();
             UpdateTimerRectSizes();
         }
+
     }
 
     private void UpdateTimerText()
@@ -301,7 +301,7 @@ public class PomoTimer : Control
 
     private void CloseOptionsPopup()
     {
-        OptionsPopup.Visible = false;
+        OptionsPopup.HideOptionsPopup();
     }
 
     private void OnPauseButtonPressed()
@@ -333,7 +333,7 @@ public class PomoTimer : Control
 
     private void OnOptionsButtonPressed()
     {
-        OptionsPopup.Visible = true;
+        OptionsPopup.ShowOptionsPopup();
     }
 
     private void OnOptionsPopupOverlayButtonPressed()
