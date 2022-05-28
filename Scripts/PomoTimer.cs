@@ -26,6 +26,8 @@ public class PomoTimer : Control
     [Export] private NodePath OptionsLowerTimerColorPickerTextureRectNodePath;
 
     [Export] private NodePath OptionsWorkTimerDurationLineEditNodePath;
+    [Export] private NodePath OptionsShortBreakTimerDurationLineEditNodePath;
+    [Export] private NodePath OptionsLongBreakTimerDurationLineEditNodePath;
 
     [Export] private Texture PauseTexture;
     [Export] private Texture PlayTexture;
@@ -62,6 +64,8 @@ public class PomoTimer : Control
     private TextureRect OptionsTimerUpperColorPickerTextureRect;
     private TextureRect OptionsTimerLowerColorPickerTextureRect;
     private LineEdit OptionsWorkTimerDurationLineEdit;
+    private LineEdit OptionsShortBreakTimerDurationLineEdit;
+    private LineEdit OptionsLongBreakTimerDurationLineEdit;
 
     private int workPhasesPerLongBreak = 5;
     private int workMinutes = 25;
@@ -108,6 +112,8 @@ public class PomoTimer : Control
         OptionsTimerLowerColorPickerTextureRect = GetNode<TextureRect>(OptionsLowerTimerColorPickerTextureRectNodePath);
 
         OptionsWorkTimerDurationLineEdit = GetNode<LineEdit>(OptionsWorkTimerDurationLineEditNodePath);
+        OptionsShortBreakTimerDurationLineEdit = GetNode<LineEdit>(OptionsShortBreakTimerDurationLineEditNodePath);
+        OptionsLongBreakTimerDurationLineEdit = GetNode<LineEdit>(OptionsLongBreakTimerDurationLineEditNodePath);
 
         UpdateTimerText();
         UpdateTimerRectSizes();
@@ -357,6 +363,26 @@ public class PomoTimer : Control
         SubmitTimerDuration(OptionsWorkTimerDurationLineEdit, OptionsWorkTimerDurationLineEdit.Text, Phase.Work);
     }
 
+    private void OnShortBreakTimerDurationLineEditTextEntered(string newText)
+    {
+        SubmitTimerDuration(OptionsShortBreakTimerDurationLineEdit, newText, Phase.ShortBreak);
+    }
+
+    private void OnShortBreakTimerDurationLineEditFocusExited()
+    {
+        SubmitTimerDuration(OptionsShortBreakTimerDurationLineEdit, OptionsShortBreakTimerDurationLineEdit.Text, Phase.ShortBreak);
+    }
+
+    private void OnLongBreakTimerDurationLineEditTextEntered(string newText)
+    {
+        SubmitTimerDuration(OptionsLongBreakTimerDurationLineEdit, newText, Phase.LongBreak);
+    }
+
+    private void OnLongBreakTimerDurationLineEditFocusExited()
+    {
+        SubmitTimerDuration(OptionsLongBreakTimerDurationLineEdit, OptionsLongBreakTimerDurationLineEdit.Text, Phase.LongBreak);
+    }
+
     private void SubmitTimerDuration(LineEdit OptionsTimerDurationLineEdit, string newText, Phase phaseType)
     {
         int newMinutesAsInteger;
@@ -385,6 +411,16 @@ public class PomoTimer : Control
                     workMinutes = newMinutesAsInteger;
                     break;
                 }
+                case Phase.ShortBreak:
+                {
+                    shortBreakMinutes = newMinutesAsInteger;
+                    break;
+                }
+                case Phase.LongBreak:
+                {
+                    longBreakMinutes = newMinutesAsInteger;
+                    break;
+                }
                 default:
                     break;
             }
@@ -396,6 +432,16 @@ public class PomoTimer : Control
             case Phase.Work:
             {
                 OptionsTimerDurationLineEdit.Text = workMinutes.ToString();
+                break;
+            }
+            case Phase.ShortBreak:
+            {
+                OptionsTimerDurationLineEdit.Text = shortBreakMinutes.ToString();
+                break;
+            }
+            case Phase.LongBreak:
+            {
+                OptionsTimerDurationLineEdit.Text = longBreakMinutes.ToString();
                 break;
             }
             default:
