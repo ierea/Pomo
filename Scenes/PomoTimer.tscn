@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Fonts/MainTimerFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/AnimatedTimerButton.cs" type="Script" id=2]
@@ -13,6 +13,14 @@
 [ext_resource path="res://Sounds/EponnFreesound/WorkPhaseStartSfx.wav" type="AudioStream" id=11]
 [ext_resource path="res://Textures/FluentIcons/ic_fluent_pin_24_regular.png" type="Texture" id=12]
 [ext_resource path="res://Textures/FluentIcons/ic_fluent_pin_off_24_regular.png" type="Texture" id=13]
+[ext_resource path="res://Styles/OptionsPanelStyle.tres" type="StyleBox" id=14]
+[ext_resource path="res://Textures/FluentIcons/ic_fluent_settings_24_regular.png" type="Texture" id=15]
+[ext_resource path="res://Fonts/OptionsMenuTitleFont.tres" type="DynamicFont" id=16]
+[ext_resource path="res://Fonts/OptionsMenuParameterFont.tres" type="DynamicFont" id=17]
+[ext_resource path="res://Styles/OptionsPopupOverlayButtonStyle.tres" type="StyleBox" id=18]
+[ext_resource path="res://Textures/FluentIcons/ic_fluent_checkmark_24_regular.png" type="Texture" id=19]
+[ext_resource path="res://Styles/ColorPickerButtonStyle.tres" type="StyleBox" id=20]
+[ext_resource path="res://Scripts/AnimatedColorPickerButton.cs" type="Script" id=21]
 
 [sub_resource type="Animation" id=5]
 resource_name = "Hovered"
@@ -112,7 +120,7 @@ tracks/0/keys = {
 resource_name = "Hovered"
 step = 0.01
 tracks/0/type = "value"
-tracks/0/path = NodePath("MarginContainer/PinWindowButtonTextureRect:rect_scale")
+tracks/0/path = NodePath("MarginContainer/OptionsButtonTextureRect:rect_scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -128,7 +136,7 @@ tracks/0/keys = {
 resource_name = "Normal"
 step = 0.01
 tracks/0/type = "value"
-tracks/0/path = NodePath("MarginContainer/PinWindowButtonTextureRect:rect_scale")
+tracks/0/path = NodePath("MarginContainer/OptionsButtonTextureRect:rect_scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -144,7 +152,229 @@ tracks/0/keys = {
 resource_name = "Pressed"
 step = 0.01
 tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/OptionsButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.3, 1.3 ), Vector2( 0.8, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Hovered"
+step = 0.01
+tracks/0/type = "value"
 tracks/0/path = NodePath("MarginContainer/PinWindowButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.3 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "Normal"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/PinWindowButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "Pressed"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/PinWindowButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.3, 1.3 ), Vector2( 0.8, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "Hovered"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("UpperTimerColorPickerTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.3 ) ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "Normal"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("UpperTimerColorPickerTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "Pressed"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("UpperTimerColorPickerTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.3, 1.3 ), Vector2( 0.8, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=23]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("UpperTimerColorPickerTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "Hovered"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("LowerTimerColorPickerTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.3 ) ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "Normal"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("LowerTimerColorPickerTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "Pressed"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("LowerTimerColorPickerTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.3, 1.3 ), Vector2( 0.8, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=24]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("LowerTimerColorPickerTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "Hovered"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ConfirmOptionsButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.3 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "Normal"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ConfirmOptionsButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "Pressed"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ConfirmOptionsButtonTextureRect:rect_scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -165,9 +395,14 @@ TimeLabelNodePath = NodePath("TimerControls/VBoxContainer/TimeLabel")
 PauseButtonNodePath = NodePath("TimerControls/VBoxContainer/HBoxContainer/PauseButton")
 PauseButtonTextureRectNodePath = NodePath("TimerControls/VBoxContainer/HBoxContainer/PauseButton/MarginContainer/PauseButtonTextureRect")
 ResetButtonNodePath = NodePath("TimerControls/VBoxContainer/HBoxContainer/ResetButton")
-UpperTimerTextureRectNodePath = NodePath("VBoxContainer/UpperTimerTextureRect")
-LowerTimerTextureRectNodePath = NodePath("VBoxContainer/LowerTimerTextureRect")
-PinWindowButtonTextureRectNodePath = NodePath("PinControls/VBoxContainer/HBoxContainer/PinWindowButton/MarginContainer/PinWindowButtonTextureRect")
+UpperTimerTextureRectNodePath = NodePath("TimerRects/VBoxContainer/UpperTimerTextureRect")
+LowerTimerTextureRectNodePath = NodePath("TimerRects/VBoxContainer/LowerTimerTextureRect")
+PinWindowButtonTextureRectNodePath = NodePath("AppControls/VBoxContainer/HBoxContainer/PinWindowButton/MarginContainer/PinWindowButtonTextureRect")
+OptionsPopupNodePath = NodePath("OptionsPopup")
+OptionsUpperTimerColorPickerButtonNodePathUHWHATWHY = NodePath("OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton")
+OptionsLowerTimerColorPickerButtonNodePathWHATWHYYY = NodePath("OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton")
+OptionsUpperTimerColorPickerTextureRectNodePath = NodePath("OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton/UpperTimerColorPickerTextureRect")
+OptionsLowerTimerColorPickerTextureRectNodePath = NodePath("OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton/LowerTimerColorPickerTextureRect")
 PauseTexture = ExtResource( 6 )
 PlayTexture = ExtResource( 5 )
 PinWindowTexture = ExtResource( 12 )
@@ -176,6 +411,8 @@ WorkPhaseStartSfx = ExtResource( 11 )
 ShortBreakPhaseStartSfx = ExtResource( 10 )
 LongBreakPhaseStartSfx = ExtResource( 9 )
 SfxVolume = -5.0
+upperTimerColor = Color( 0.109804, 0.462745, 0.462745, 1 )
+lowerTimerColor = Color( 0.552941, 0.819608, 1, 1 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
@@ -185,12 +422,16 @@ anchor_bottom = 1.0
 texture = ExtResource( 7 )
 expand = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="TimerRects" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TimerRects"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 0
 
-[node name="UpperTimerTextureRect" type="TextureRect" parent="VBoxContainer"]
+[node name="UpperTimerTextureRect" type="TextureRect" parent="TimerRects/VBoxContainer"]
 modulate = Color( 1, 0.462745, 0.462745, 1 )
 margin_right = 480.0
 margin_bottom = 240.0
@@ -199,7 +440,7 @@ size_flags_stretch_ratio = 0.5
 texture = ExtResource( 7 )
 expand = true
 
-[node name="LowerTimerTextureRect" type="TextureRect" parent="VBoxContainer"]
+[node name="LowerTimerTextureRect" type="TextureRect" parent="TimerRects/VBoxContainer"]
 modulate = Color( 0.552941, 0.819608, 1, 1 )
 margin_top = 240.0
 margin_right = 480.0
@@ -222,14 +463,14 @@ alignment = 1
 
 [node name="Spacer" type="Control" parent="TimerControls/VBoxContainer"]
 margin_right = 480.0
-margin_bottom = 163.0
+margin_bottom = 172.0
 mouse_filter = 1
 size_flags_vertical = 7
 
 [node name="TimeLabel" type="Label" parent="TimerControls/VBoxContainer"]
-margin_top = 163.0
+margin_top = 172.0
 margin_right = 480.0
-margin_bottom = 252.0
+margin_bottom = 261.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = ExtResource( 1 )
 text = "25:00"
@@ -237,15 +478,15 @@ align = 1
 valign = 1
 
 [node name="Spacer2" type="Control" parent="TimerControls/VBoxContainer"]
-margin_top = 252.0
+margin_top = 261.0
 margin_right = 480.0
-margin_bottom = 268.0
+margin_bottom = 277.0
 rect_min_size = Vector2( 0, 16 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TimerControls/VBoxContainer"]
-margin_top = 268.0
+margin_top = 277.0
 margin_right = 480.0
-margin_bottom = 316.0
+margin_bottom = 325.0
 size_flags_vertical = 5
 size_flags_stretch_ratio = 0.3
 
@@ -355,43 +596,93 @@ margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="Spacer3" type="Control" parent="TimerControls/VBoxContainer"]
-margin_top = 316.0
+margin_top = 325.0
 margin_right = 480.0
 margin_bottom = 480.0
 size_flags_vertical = 7
+size_flags_stretch_ratio = 0.9
 
-[node name="PinControls" type="Control" parent="."]
+[node name="AppControls" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PinControls"]
+[node name="VBoxContainer" type="VBoxContainer" parent="AppControls"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 custom_constants/separation = 0
 
-[node name="Spacer" type="Control" parent="PinControls/VBoxContainer"]
+[node name="Spacer" type="Control" parent="AppControls/VBoxContainer"]
 margin_right = 480.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 0, 8 )
 mouse_filter = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PinControls/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="AppControls/VBoxContainer"]
 margin_top = 8.0
 margin_right = 480.0
 margin_bottom = 56.0
 custom_constants/separation = 0
 
-[node name="Spacer" type="Control" parent="PinControls/VBoxContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="AppControls/VBoxContainer/HBoxContainer"]
 margin_right = 8.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 8, 0 )
 mouse_filter = 1
 
-[node name="PinWindowButton" type="Button" parent="PinControls/VBoxContainer/HBoxContainer"]
+[node name="OptionsButton" type="Button" parent="AppControls/VBoxContainer/HBoxContainer"]
 margin_left = 8.0
 margin_right = 56.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = ExtResource( 8 )
+script = ExtResource( 2 )
+AnimationPlayerNodePath = NodePath("AnimationPlayer")
+IconTextureRectNodePath = NodePath("MarginContainer/OptionsButtonTextureRect")
+NormalAnimationName = "Normal"
+HoveredAnimationName = "Hovered"
+ButtonDownAnimationName = "Pressed"
+
+[node name="MarginContainer" type="MarginContainer" parent="AppControls/VBoxContainer/HBoxContainer/OptionsButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="OptionsButtonTextureRect" type="TextureRect" parent="AppControls/VBoxContainer/HBoxContainer/OptionsButton/MarginContainer"]
+modulate = Color( 1, 1, 1, 0.47451 )
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 38.0
+margin_bottom = 38.0
+rect_pivot_offset = Vector2( 14, 14 )
+texture = ExtResource( 15 )
+expand = true
+stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AppControls/VBoxContainer/HBoxContainer/OptionsButton"]
+anims/Hovered = SubResource( 9 )
+anims/Normal = SubResource( 8 )
+anims/Pressed = SubResource( 10 )
+
+[node name="Spacer2" type="Control" parent="AppControls/VBoxContainer/HBoxContainer"]
+margin_left = 56.0
+margin_right = 64.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 8, 0 )
+mouse_filter = 1
+
+[node name="PinWindowButton" type="Button" parent="AppControls/VBoxContainer/HBoxContainer"]
+margin_left = 64.0
+margin_right = 112.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
 custom_styles/hover = ExtResource( 8 )
@@ -406,7 +697,7 @@ NormalAnimationName = "Normal"
 HoveredAnimationName = "Hovered"
 ButtonDownAnimationName = "Pressed"
 
-[node name="MarginContainer" type="MarginContainer" parent="PinControls/VBoxContainer/HBoxContainer/PinWindowButton"]
+[node name="MarginContainer" type="MarginContainer" parent="AppControls/VBoxContainer/HBoxContainer/PinWindowButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
@@ -415,7 +706,7 @@ custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
 
-[node name="PinWindowButtonTextureRect" type="TextureRect" parent="PinControls/VBoxContainer/HBoxContainer/PinWindowButton/MarginContainer"]
+[node name="PinWindowButtonTextureRect" type="TextureRect" parent="AppControls/VBoxContainer/HBoxContainer/PinWindowButton/MarginContainer"]
 modulate = Color( 1, 1, 1, 0.47451 )
 margin_left = 10.0
 margin_top = 10.0
@@ -426,10 +717,237 @@ texture = ExtResource( 12 )
 expand = true
 stretch_mode = 6
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PinControls/VBoxContainer/HBoxContainer/PinWindowButton"]
-anims/Hovered = SubResource( 9 )
-anims/Normal = SubResource( 8 )
-anims/Pressed = SubResource( 10 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AppControls/VBoxContainer/HBoxContainer/PinWindowButton"]
+anims/Hovered = SubResource( 11 )
+anims/Normal = SubResource( 12 )
+anims/Pressed = SubResource( 13 )
+
+[node name="OptionsPopup" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="OptionsPopup"]
+modulate = Color( 0, 0, 0, 0.160784 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+
+[node name="OptionsPopupOverlayButton" type="Button" parent="OptionsPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/hover = ExtResource( 18 )
+custom_styles/pressed = ExtResource( 18 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 18 )
+custom_styles/normal = ExtResource( 18 )
+
+[node name="CenterContainer" type="CenterContainer" parent="OptionsPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="OptionsPopup/CenterContainer"]
+margin_left = 130.0
+margin_top = 130.0
+margin_right = 350.0
+margin_bottom = 350.0
+rect_min_size = Vector2( 220, 220 )
+custom_styles/panel = ExtResource( 14 )
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsPopup/CenterContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsPopup/CenterContainer/Panel/MarginContainer"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 204.0
+margin_bottom = 204.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer"]
+margin_right = 188.0
+margin_bottom = 29.0
+custom_colors/font_color = Color( 0.168627, 0.168627, 0.168627, 1 )
+custom_fonts/font = ExtResource( 16 )
+text = "Options"
+align = 1
+valign = 1
+
+[node name="Spacer" type="Control" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer"]
+margin_top = 29.0
+margin_right = 188.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 0, 16 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer"]
+margin_top = 45.0
+margin_right = 188.0
+margin_bottom = 101.0
+custom_constants/separation = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer"]
+margin_right = 188.0
+margin_bottom = 24.0
+custom_constants/separation = 0
+
+[node name="Label2" type="Label" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+margin_right = 85.0
+margin_bottom = 23.0
+custom_colors/font_color = Color( 0.168627, 0.168627, 0.168627, 1 )
+custom_fonts/font = ExtResource( 17 )
+text = "Upper Color"
+align = 1
+valign = 1
+
+[node name="Spacer" type="Control" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 85.0
+margin_right = 164.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="UpperTimerColorPickerButton" type="ColorPickerButton" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 164.0
+margin_right = 188.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+edit_alpha = false
+script = ExtResource( 21 )
+AnimationPlayerNodePath = NodePath("AnimationPlayer")
+IconTextureRectNodePath = NodePath("UpperTimerColorPickerTextureRect")
+NormalAnimationName = "Normal"
+HoveredAnimationName = "Hovered"
+ButtonDownAnimationName = "Pressed"
+
+[node name="UpperTimerColorPickerTextureRect" type="TextureRect" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton"]
+modulate = Color( 0.513726, 0.270588, 0.270588, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 12, 12 )
+texture = ExtResource( 7 )
+expand = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton"]
+playback_default_blend_time = 0.05
+anims/Hovered = SubResource( 18 )
+anims/Normal = SubResource( 17 )
+anims/Pressed = SubResource( 19 )
+anims/RESET = SubResource( 23 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer"]
+margin_top = 32.0
+margin_right = 188.0
+margin_bottom = 56.0
+custom_constants/separation = 0
+
+[node name="Label2" type="Label" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 85.0
+margin_bottom = 23.0
+custom_colors/font_color = Color( 0.168627, 0.168627, 0.168627, 1 )
+custom_fonts/font = ExtResource( 17 )
+text = "Lower Color"
+align = 1
+valign = 1
+
+[node name="Spacer" type="Control" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 85.0
+margin_right = 164.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="LowerTimerColorPickerButton" type="ColorPickerButton" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 164.0
+margin_right = 188.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/hover = ExtResource( 20 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 20 )
+custom_styles/disabled = ExtResource( 20 )
+custom_styles/normal = ExtResource( 20 )
+edit_alpha = false
+script = ExtResource( 21 )
+AnimationPlayerNodePath = NodePath("AnimationPlayer")
+IconTextureRectNodePath = NodePath("LowerTimerColorPickerTextureRect")
+NormalAnimationName = "Normal"
+HoveredAnimationName = "Hovered"
+ButtonDownAnimationName = "Pressed"
+
+[node name="LowerTimerColorPickerTextureRect" type="TextureRect" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton"]
+modulate = Color( 0.513726, 0.270588, 0.270588, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 12, 12 )
+texture = ExtResource( 7 )
+expand = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton"]
+playback_default_blend_time = 0.05
+anims/Hovered = SubResource( 20 )
+anims/Normal = SubResource( 21 )
+anims/Pressed = SubResource( 22 )
+anims/RESET = SubResource( 24 )
+
+[node name="Spacer2" type="Control" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer"]
+margin_top = 101.0
+margin_right = 188.0
+margin_bottom = 156.0
+size_flags_vertical = 3
+
+[node name="ConfirmOptionsButton" type="Button" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer"]
+margin_top = 156.0
+margin_right = 188.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = ExtResource( 8 )
+script = ExtResource( 2 )
+AnimationPlayerNodePath = NodePath("AnimationPlayer")
+IconTextureRectNodePath = NodePath("MarginContainer/ConfirmOptionsButtonTextureRect")
+NormalAnimationName = "Normal"
+HoveredAnimationName = "Hovered"
+ButtonDownAnimationName = "Pressed"
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="ConfirmOptionsButtonTextureRect" type="TextureRect" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton/MarginContainer"]
+modulate = Color( 1, 1, 1, 0.47451 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 184.0
+margin_bottom = 28.0
+rect_pivot_offset = Vector2( 14, 14 )
+texture = ExtResource( 19 )
+expand = true
+stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton"]
+anims/Hovered = SubResource( 14 )
+anims/Normal = SubResource( 15 )
+anims/Pressed = SubResource( 16 )
 
 [connection signal="button_down" from="TimerControls/VBoxContainer/HBoxContainer/PauseButton" to="TimerControls/VBoxContainer/HBoxContainer/PauseButton" method="OnAnimatedTimerButtonButtonDown"]
 [connection signal="button_up" from="TimerControls/VBoxContainer/HBoxContainer/PauseButton" to="TimerControls/VBoxContainer/HBoxContainer/PauseButton" method="OnAnimatedTimerButtonButtonUp"]
@@ -441,8 +959,29 @@ anims/Pressed = SubResource( 10 )
 [connection signal="mouse_entered" from="TimerControls/VBoxContainer/HBoxContainer/ResetButton" to="TimerControls/VBoxContainer/HBoxContainer/ResetButton" method="OnAnimatedTimerButtonMouseEntered"]
 [connection signal="mouse_exited" from="TimerControls/VBoxContainer/HBoxContainer/ResetButton" to="TimerControls/VBoxContainer/HBoxContainer/ResetButton" method="OnAnimatedTimerButtonMouseExited"]
 [connection signal="pressed" from="TimerControls/VBoxContainer/HBoxContainer/ResetButton" to="." method="OnResetButtonPressed"]
-[connection signal="button_down" from="PinControls/VBoxContainer/HBoxContainer/PinWindowButton" to="PinControls/VBoxContainer/HBoxContainer/PinWindowButton" method="OnAnimatedTimerButtonButtonDown"]
-[connection signal="button_up" from="PinControls/VBoxContainer/HBoxContainer/PinWindowButton" to="PinControls/VBoxContainer/HBoxContainer/PinWindowButton" method="OnAnimatedTimerButtonButtonUp"]
-[connection signal="mouse_entered" from="PinControls/VBoxContainer/HBoxContainer/PinWindowButton" to="PinControls/VBoxContainer/HBoxContainer/PinWindowButton" method="OnAnimatedTimerButtonMouseEntered"]
-[connection signal="mouse_exited" from="PinControls/VBoxContainer/HBoxContainer/PinWindowButton" to="PinControls/VBoxContainer/HBoxContainer/PinWindowButton" method="OnAnimatedTimerButtonMouseExited"]
-[connection signal="pressed" from="PinControls/VBoxContainer/HBoxContainer/PinWindowButton" to="." method="OnPinWindowButtonPressed"]
+[connection signal="button_down" from="AppControls/VBoxContainer/HBoxContainer/OptionsButton" to="AppControls/VBoxContainer/HBoxContainer/OptionsButton" method="OnAnimatedTimerButtonButtonDown"]
+[connection signal="button_up" from="AppControls/VBoxContainer/HBoxContainer/OptionsButton" to="AppControls/VBoxContainer/HBoxContainer/OptionsButton" method="OnAnimatedTimerButtonButtonUp"]
+[connection signal="mouse_entered" from="AppControls/VBoxContainer/HBoxContainer/OptionsButton" to="AppControls/VBoxContainer/HBoxContainer/OptionsButton" method="OnAnimatedTimerButtonMouseEntered"]
+[connection signal="mouse_exited" from="AppControls/VBoxContainer/HBoxContainer/OptionsButton" to="AppControls/VBoxContainer/HBoxContainer/OptionsButton" method="OnAnimatedTimerButtonMouseExited"]
+[connection signal="pressed" from="AppControls/VBoxContainer/HBoxContainer/OptionsButton" to="." method="OnOptionsButtonPressed"]
+[connection signal="button_down" from="AppControls/VBoxContainer/HBoxContainer/PinWindowButton" to="AppControls/VBoxContainer/HBoxContainer/PinWindowButton" method="OnAnimatedTimerButtonButtonDown"]
+[connection signal="button_up" from="AppControls/VBoxContainer/HBoxContainer/PinWindowButton" to="AppControls/VBoxContainer/HBoxContainer/PinWindowButton" method="OnAnimatedTimerButtonButtonUp"]
+[connection signal="mouse_entered" from="AppControls/VBoxContainer/HBoxContainer/PinWindowButton" to="AppControls/VBoxContainer/HBoxContainer/PinWindowButton" method="OnAnimatedTimerButtonMouseEntered"]
+[connection signal="mouse_exited" from="AppControls/VBoxContainer/HBoxContainer/PinWindowButton" to="AppControls/VBoxContainer/HBoxContainer/PinWindowButton" method="OnAnimatedTimerButtonMouseExited"]
+[connection signal="pressed" from="AppControls/VBoxContainer/HBoxContainer/PinWindowButton" to="." method="OnPinWindowButtonPressed"]
+[connection signal="pressed" from="OptionsPopup/OptionsPopupOverlayButton" to="." method="OnOptionsPopupOverlayButtonPressed"]
+[connection signal="button_down" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" to="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" method="OnAnimatedColorPickerButtonButtonDown"]
+[connection signal="button_up" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" to="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" method="OnAnimatedColorPickerButtonButtonUp"]
+[connection signal="color_changed" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" to="." method="OnUpperTimerColorPickerButtonColorChanged"]
+[connection signal="mouse_entered" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" to="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" method="OnAnimatedColorPickerButtonMouseEntered"]
+[connection signal="mouse_exited" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" to="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" method="OnAnimatedColorPickerButtonMouseExited"]
+[connection signal="button_down" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" to="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" method="OnAnimatedColorPickerButtonButtonDown"]
+[connection signal="button_up" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" to="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" method="OnAnimatedColorPickerButtonButtonUp"]
+[connection signal="color_changed" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" to="." method="OnLowerTimerColorPickerButtonColorChanged"]
+[connection signal="mouse_entered" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" to="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" method="OnAnimatedColorPickerButtonMouseEntered"]
+[connection signal="mouse_exited" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" to="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" method="OnAnimatedColorPickerButtonMouseExited"]
+[connection signal="button_down" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" to="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" method="OnAnimatedTimerButtonButtonDown"]
+[connection signal="button_up" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" to="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" method="OnAnimatedTimerButtonButtonUp"]
+[connection signal="mouse_entered" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" to="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" method="OnAnimatedTimerButtonMouseEntered"]
+[connection signal="mouse_exited" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" to="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" method="OnAnimatedTimerButtonMouseExited"]
+[connection signal="pressed" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" to="." method="OnConfirmOptionsButtonPressed"]

@@ -17,7 +17,13 @@ public class PomoTimer : Control
     [Export] private NodePath ResetButtonNodePath;
     [Export] private NodePath UpperTimerTextureRectNodePath;
     [Export] private NodePath LowerTimerTextureRectNodePath;
+
     [Export] private NodePath PinWindowButtonTextureRectNodePath;
+    [Export] private NodePath OptionsPopupNodePath;
+    [Export] private NodePath OptionsUpperTimerColorPickerButtonNodePathUHWHATWHY;
+    [Export] private NodePath OptionsLowerTimerColorPickerButtonNodePathWHATWHYYY;
+    [Export] private NodePath OptionsUpperTimerColorPickerTextureRectNodePath;
+    [Export] private NodePath OptionsLowerTimerColorPickerTextureRectNodePath;
 
     [Export] private Texture PauseTexture;
     [Export] private Texture PlayTexture;
@@ -29,6 +35,9 @@ public class PomoTimer : Control
     [Export] private AudioStream LongBreakPhaseStartSfx;
 
     [Export] private float SfxVolume;
+
+    [Export] private Color upperTimerColor;
+    [Export] private Color lowerTimerColor;
 
     private const int SpeedMultiplier = 1;
     private const int MillisecondsInASecond = 1000;
@@ -42,6 +51,11 @@ public class PomoTimer : Control
     private TextureRect UpperTimerTextureRect;
     private TextureRect LowerTimerTextureRect;
     private TextureRect PinWindowButtonTextureRect;
+    private Control OptionsPopup;
+    private ColorPickerButton OptionsTimerUpperColorPickerButton;
+    private ColorPickerButton OptionsTimerLowerColorPickerButton;
+    private TextureRect OptionsTimerUpperColorPickerTextureRect;
+    private TextureRect OptionsTimerLowerColorPickerTextureRect;
 
     private int workPhasesPerLongBreak = 5;
     private int workMinutes = 25;
@@ -55,6 +69,7 @@ public class PomoTimer : Control
     private bool timerActive;
     private bool freshSessionAndShouldPlaySfxOnPlay;
     private int workPhasesSinceLongBreak;
+
 
     public PomoTimer()
     {
@@ -77,12 +92,24 @@ public class PomoTimer : Control
         PauseButton = GetNode<Button>(PauseButtonNodePath);
         PauseButtonTextureRect = GetNode<TextureRect>(PauseButtonTextureRectNodePath);
         ResetButton = GetNode<Button>(ResetButtonNodePath);
+
         UpperTimerTextureRect = GetNode<TextureRect>(UpperTimerTextureRectNodePath);
         LowerTimerTextureRect = GetNode<TextureRect>(LowerTimerTextureRectNodePath);
+
         PinWindowButtonTextureRect = GetNode<TextureRect>(PinWindowButtonTextureRectNodePath);
 
+        OptionsPopup = GetNode<Control>(OptionsPopupNodePath);
+        OptionsPopup.Visible = false;
+
+        OptionsTimerUpperColorPickerButton = GetNode<ColorPickerButton>(OptionsUpperTimerColorPickerButtonNodePathUHWHATWHY);
+        OptionsTimerLowerColorPickerButton = GetNode<ColorPickerButton>(OptionsLowerTimerColorPickerButtonNodePathWHATWHYYY);
+        OptionsTimerUpperColorPickerTextureRect = GetNode<TextureRect>(OptionsUpperTimerColorPickerTextureRectNodePath);
+        OptionsTimerLowerColorPickerTextureRect = GetNode<TextureRect>(OptionsLowerTimerColorPickerTextureRectNodePath);
+
         UpdateTimerText();
-        UpdateTimerTextures();
+        UpdateTimerRectSizes();
+        UpdateTimerRectColors();
+        UpdateOptions();
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -111,7 +138,7 @@ public class PomoTimer : Control
             }
 
             UpdateTimerText();
-            UpdateTimerTextures();
+            UpdateTimerRectSizes();
         }
     }
 
@@ -120,7 +147,7 @@ public class PomoTimer : Control
         TimeLabel.Text = currentMinutesRemaining + ":" + currentSecondsRemaining.ToString("0#");
     }
 
-    private void UpdateTimerTextures()
+    private void UpdateTimerRectSizes()
     {
         float millisecondsRemaining = currentMinutesRemaining * SecondsInAMinute * MillisecondsInASecond + currentSecondsRemaining * MillisecondsInASecond + currentMillisecondsRemaining;
 
@@ -151,6 +178,21 @@ public class PomoTimer : Control
                 break;
             }
         }
+    }
+
+    private void UpdateTimerRectColors()
+    {
+        UpperTimerTextureRect.Modulate = upperTimerColor;
+        LowerTimerTextureRect.Modulate = lowerTimerColor;
+    }
+
+    private void UpdateOptions()
+    {
+        OptionsTimerUpperColorPickerButton.Color = upperTimerColor;
+        OptionsTimerLowerColorPickerButton.Color = lowerTimerColor;
+
+        OptionsTimerUpperColorPickerTextureRect.Modulate = upperTimerColor;
+        OptionsTimerLowerColorPickerTextureRect.Modulate = lowerTimerColor;
     }
 
     private void GoToNextTimerPhase()
@@ -218,6 +260,11 @@ public class PomoTimer : Control
         currentPhase = newPhase;
     }
 
+    private void CloseOptionsPopup()
+    {
+        OptionsPopup.Visible = false;
+    }
+
     private void OnPauseButtonPressed()
     {
         if (freshSessionAndShouldPlaySfxOnPlay)
@@ -253,7 +300,36 @@ public class PomoTimer : Control
         PauseButtonTextureRect.Texture = PlayTexture;
 
         UpdateTimerText();
-        UpdateTimerTextures();
+        UpdateTimerRectSizes();
+    }
+
+    private void OnOptionsButtonPressed()
+    {
+        OptionsPopup.Visible = true;
+    }
+
+    private void OnOptionsPopupOverlayButtonPressed()
+    {
+        CloseOptionsPopup();
+    }
+
+    private void OnConfirmOptionsButtonPressed()
+    {
+        CloseOptionsPopup();
+    }
+
+    private void OnUpperTimerColorPickerButtonColorChanged(Color newColor)
+    {
+        upperTimerColor = newColor;
+        UpdateTimerRectColors();
+        UpdateOptions();
+    }
+
+    private void OnLowerTimerColorPickerButtonColorChanged(Color newColor)
+    {
+        lowerTimerColor = newColor;
+        UpdateTimerRectColors();
+        UpdateOptions();
     }
 
     private void OnPinWindowButtonPressed()
