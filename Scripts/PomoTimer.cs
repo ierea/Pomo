@@ -28,6 +28,7 @@ public class PomoTimer : Control
     [Export] private NodePath OptionsWorkTimerDurationLineEditNodePath;
     [Export] private NodePath OptionsShortBreakTimerDurationLineEditNodePath;
     [Export] private NodePath OptionsLongBreakTimerDurationLineEditNodePath;
+    [Export] private NodePath OptionsLongBreakFrequencyLineEditNodePath;
 
     [Export] private Texture PauseTexture;
     [Export] private Texture PlayTexture;
@@ -50,6 +51,10 @@ public class PomoTimer : Control
     private const int AbsoluteMinimumMinutesPerPhase = 1;
     private const int AbsoluteMaximumMinutesPerPhase = 9999;
 
+    private const int AbsoluteMinimumWorkPhasesPerLongBreak = 1;
+    private const int AbsoluteMaximumWorkPhasesPerLongBreak = 9999;
+
+
     private AudioStreamPlayer AudioStreamPlayer;
     private Label TimeLabel;
     private Button PauseButton;
@@ -66,6 +71,7 @@ public class PomoTimer : Control
     private LineEdit OptionsWorkTimerDurationLineEdit;
     private LineEdit OptionsShortBreakTimerDurationLineEdit;
     private LineEdit OptionsLongBreakTimerDurationLineEdit;
+    private LineEdit OptionsLongBreakFrequencyLineEdit;
 
     private int workPhasesPerLongBreak = 5;
     private int workMinutes = 25;
@@ -114,6 +120,7 @@ public class PomoTimer : Control
         OptionsWorkTimerDurationLineEdit = GetNode<LineEdit>(OptionsWorkTimerDurationLineEditNodePath);
         OptionsShortBreakTimerDurationLineEdit = GetNode<LineEdit>(OptionsShortBreakTimerDurationLineEditNodePath);
         OptionsLongBreakTimerDurationLineEdit = GetNode<LineEdit>(OptionsLongBreakTimerDurationLineEditNodePath);
+        OptionsLongBreakFrequencyLineEdit = GetNode<LineEdit>(OptionsLongBreakFrequencyLineEditNodePath);
 
         UpdateTimerText();
         UpdateTimerRectSizes();
@@ -455,6 +462,52 @@ public class PomoTimer : Control
         }
         
         OptionsTimerDurationLineEdit.ReleaseFocus();
+    }
+
+    private void OnLongBreakFrequencyLineEditTextEntered(string newText)
+    {
+        SubmitLongBreakFrequency(newText);
+    }
+
+    private void OnLongBreakFrequencyLineEditFocusExited()
+    {
+        SubmitLongBreakFrequency(OptionsLongBreakFrequencyLineEdit.Text);
+    }
+
+    private void SubmitLongBreakFrequency(string newText)
+    {
+        int newFrequencyAsInteger;
+        bool newTextIsNumeric = false;
+
+        // Try to parse the input, rounding to an integer if it's a float.
+        if (float.TryParse(newText, out float newFrequencyAsFloat))
+        {
+            newFrequencyAsInteger = Mathf.RoundToInt(newFrequencyAsFloat);
+            newTextIsNumeric = true;
+        }
+        else if (int.TryParse(newText, out newFrequencyAsInteger))
+        {
+            newTextIsNumeric = true;
+        }
+
+        // If input is valid, clamp and apply it.
+        if (newTextIsNumeric)
+        {
+            newFrequencyAsInteger = Mathf.Clamp(newFrequencyAsInteger, AbsoluteMinimumWorkPhasesPerLongBreak, AbsoluteMaximumWorkPhasesPerLongBreak);
+
+            workPhasesPerLongBreak = newFrequencyAsInteger;
+        }
+
+        // Apply the value to the text, regardless of whether it was successful.
+        OptionsLongBreakFrequencyLineEdit.Text = workPhasesPerLongBreak.ToString();
+        
+        // If in a fresh session, reset to apply the new values.
+        if (freshSessionAndShouldPlaySfxOnPlay)
+        {
+            ResetTimer();
+        }
+        
+        OptionsLongBreakFrequencyLineEdit.ReleaseFocus();
     }
 
     private void OnPinWindowButtonPressed()
