@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Fonts/MainTimerFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/AnimatedTimerButton.cs" type="Script" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://Styles/OptionsValueLineEditNormalStyle.tres" type="StyleBox" id=23]
 [ext_resource path="res://Styles/ScrollContainerTheme.tres" type="Theme" id=24]
 [ext_resource path="res://Scripts/OptionsPopup.cs" type="Script" id=25]
+[ext_resource path="res://Styles/ColorPickerTheme.tres" type="Theme" id=26]
 
 [sub_resource type="Animation" id=5]
 resource_name = "Hovered"
@@ -976,6 +977,7 @@ margin_left = 154.0
 margin_right = 178.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+theme = ExtResource( 26 )
 custom_styles/hover = ExtResource( 20 )
 custom_styles/pressed = ExtResource( 20 )
 custom_styles/focus = ExtResource( 20 )
@@ -1039,6 +1041,7 @@ margin_left = 154.0
 margin_right = 178.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
+theme = ExtResource( 26 )
 custom_styles/hover = ExtResource( 20 )
 custom_styles/pressed = ExtResource( 20 )
 custom_styles/focus = ExtResource( 20 )
@@ -1353,8 +1356,8 @@ anims/Show = SubResource( 26 )
 [connection signal="text_entered" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ShortBreakTimerDurationLineEdit" to="." method="OnShortBreakTimerDurationLineEditTextEntered"]
 [connection signal="focus_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/LongBreakTimerDurationLineEdit" to="." method="OnLongBreakTimerDurationLineEditFocusExited"]
 [connection signal="text_entered" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/LongBreakTimerDurationLineEdit" to="." method="OnLongBreakTimerDurationLineEditTextEntered"]
-[connection signal="focus_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/LongBreakFrequencyLineEdit" to="." method="OnLongBreakFrequencyLineEditFocusExited"]
 [connection signal="focus_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/LongBreakFrequencyLineEdit" to="." method="OnLongBreakTimerDurationLineEditFocusExited"]
+[connection signal="focus_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/LongBreakFrequencyLineEdit" to="." method="OnLongBreakFrequencyLineEditFocusExited"]
 [connection signal="text_entered" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/LongBreakFrequencyLineEdit" to="." method="OnLongBreakFrequencyLineEditTextEntered"]
 [connection signal="button_down" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" method="OnAnimatedTimerButtonButtonDown"]
 [connection signal="button_up" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" method="OnAnimatedTimerButtonButtonUp"]
