@@ -20,10 +20,12 @@ public class PomoTimer : Control
 
     [Export] private NodePath PinWindowButtonTextureRectNodePath;
     [Export] private NodePath OptionsPopupNodePath;
-    [Export] private NodePath OptionsUpperTimerColorPickerButtonNodePathUHWHATWHY;
-    [Export] private NodePath OptionsLowerTimerColorPickerButtonNodePathWHATWHYYY;
+    [Export] private NodePath OptionsUpperTimerColorPickerButtonNodePath;
+    [Export] private NodePath OptionsLowerTimerColorPickerButtonNodePath;
     [Export] private NodePath OptionsUpperTimerColorPickerTextureRectNodePath;
     [Export] private NodePath OptionsLowerTimerColorPickerTextureRectNodePath;
+
+    [Export] private NodePath OptionsWorkTimerDurationLineEditNodePath;
 
     [Export] private Texture PauseTexture;
     [Export] private Texture PlayTexture;
@@ -43,6 +45,9 @@ public class PomoTimer : Control
     private const int MillisecondsInASecond = 1000;
     private const int SecondsInAMinute = 60;
 
+    private const int AbsoluteMinimumMinutesPerPhase = 1;
+    private const int AbsoluteMaximumMinutesPerPhase = 9999;
+
     private AudioStreamPlayer AudioStreamPlayer;
     private Label TimeLabel;
     private Button PauseButton;
@@ -56,6 +61,7 @@ public class PomoTimer : Control
     private ColorPickerButton OptionsTimerLowerColorPickerButton;
     private TextureRect OptionsTimerUpperColorPickerTextureRect;
     private TextureRect OptionsTimerLowerColorPickerTextureRect;
+    private LineEdit OptionsWorkTimerDurationLineEdit;
 
     private int workPhasesPerLongBreak = 5;
     private int workMinutes = 25;
@@ -66,6 +72,7 @@ public class PomoTimer : Control
     private int currentMinutesRemaining;
     private int currentSecondsRemaining;
     private float currentMillisecondsRemaining;
+    private int currentPhaseTotalMinutes;
     private bool timerActive;
     private bool freshSessionAndShouldPlaySfxOnPlay;
     private int workPhasesSinceLongBreak;
@@ -73,13 +80,7 @@ public class PomoTimer : Control
 
     public PomoTimer()
     {
-        currentPhase = Phase.Work;
-        currentMinutesRemaining = workMinutes;
-        currentSecondsRemaining = 0;
-        currentMillisecondsRemaining = MillisecondsInASecond;
-        timerActive = false;
-        freshSessionAndShouldPlaySfxOnPlay = true;
-        workPhasesSinceLongBreak = 0;
+        ResetTimerValues();
     }
 
     // Called when the node enters the scene tree for the first time.
@@ -101,10 +102,12 @@ public class PomoTimer : Control
         OptionsPopup = GetNode<Control>(OptionsPopupNodePath);
         OptionsPopup.Visible = false;
 
-        OptionsTimerUpperColorPickerButton = GetNode<ColorPickerButton>(OptionsUpperTimerColorPickerButtonNodePathUHWHATWHY);
-        OptionsTimerLowerColorPickerButton = GetNode<ColorPickerButton>(OptionsLowerTimerColorPickerButtonNodePathWHATWHYYY);
+        OptionsTimerUpperColorPickerButton = GetNode<ColorPickerButton>(OptionsUpperTimerColorPickerButtonNodePath);
+        OptionsTimerLowerColorPickerButton = GetNode<ColorPickerButton>(OptionsLowerTimerColorPickerButtonNodePath);
         OptionsTimerUpperColorPickerTextureRect = GetNode<TextureRect>(OptionsUpperTimerColorPickerTextureRectNodePath);
         OptionsTimerLowerColorPickerTextureRect = GetNode<TextureRect>(OptionsLowerTimerColorPickerTextureRectNodePath);
+
+        OptionsWorkTimerDurationLineEdit = GetNode<LineEdit>(OptionsWorkTimerDurationLineEditNodePath);
 
         UpdateTimerText();
         UpdateTimerRectSizes();
@@ -155,7 +158,7 @@ public class PomoTimer : Control
         {
             case Phase.Work:
             {
-                int totalWorkMilliseconds = workMinutes * SecondsInAMinute * MillisecondsInASecond;
+                int totalWorkMilliseconds = currentPhaseTotalMinutes * SecondsInAMinute * MillisecondsInASecond;
 
                 UpperTimerTextureRect.SizeFlagsStretchRatio = 1.0f - millisecondsRemaining / totalWorkMilliseconds;
                 LowerTimerTextureRect.SizeFlagsStretchRatio = millisecondsRemaining / totalWorkMilliseconds;
@@ -163,7 +166,7 @@ public class PomoTimer : Control
             }
             case Phase.ShortBreak:
             {
-                int totalShortBreakMilliseconds = shortBreakMinutes * SecondsInAMinute * MillisecondsInASecond;
+                int totalShortBreakMilliseconds = currentPhaseTotalMinutes * SecondsInAMinute * MillisecondsInASecond;
 
                 UpperTimerTextureRect.SizeFlagsStretchRatio = millisecondsRemaining / totalShortBreakMilliseconds;
                 LowerTimerTextureRect.SizeFlagsStretchRatio = 1.0f - millisecondsRemaining / totalShortBreakMilliseconds;
@@ -171,7 +174,7 @@ public class PomoTimer : Control
             }
             case Phase.LongBreak:
             {
-                int totalLongBreakMilliseconds = longBreakMinutes * SecondsInAMinute * MillisecondsInASecond;
+                int totalLongBreakMilliseconds = currentPhaseTotalMinutes * SecondsInAMinute * MillisecondsInASecond;
 
                 UpperTimerTextureRect.SizeFlagsStretchRatio = millisecondsRemaining / totalLongBreakMilliseconds;
                 LowerTimerTextureRect.SizeFlagsStretchRatio = 1.0f - millisecondsRemaining / totalLongBreakMilliseconds;
@@ -255,9 +258,32 @@ public class PomoTimer : Control
                 break;
             }
         }
+        currentPhaseTotalMinutes = currentMinutesRemaining;
         currentSecondsRemaining = 0;
         currentMillisecondsRemaining = MillisecondsInASecond;
         currentPhase = newPhase;
+    }
+
+    private void ResetTimer()
+    {
+        ResetTimerValues();
+
+        PauseButtonTextureRect.Texture = PlayTexture;
+
+        UpdateTimerText();
+        UpdateTimerRectSizes();
+    }
+
+    private void ResetTimerValues()
+    {
+        timerActive = false;
+        freshSessionAndShouldPlaySfxOnPlay = true;
+        currentMinutesRemaining = workMinutes;
+        currentPhaseTotalMinutes = currentMinutesRemaining;
+        currentSecondsRemaining = 0;
+        currentMillisecondsRemaining = MillisecondsInASecond;
+        currentPhase = Phase.Work;
+        workPhasesSinceLongBreak = 0;
     }
 
     private void CloseOptionsPopup()
@@ -289,18 +315,7 @@ public class PomoTimer : Control
 
     private void OnResetButtonPressed()
     {
-        timerActive = false;
-        freshSessionAndShouldPlaySfxOnPlay = true;
-        currentMinutesRemaining = workMinutes;
-        currentSecondsRemaining = 0;
-        currentMillisecondsRemaining = MillisecondsInASecond;
-        currentPhase = Phase.Work;
-        workPhasesSinceLongBreak = 0;
-
-        PauseButtonTextureRect.Texture = PlayTexture;
-
-        UpdateTimerText();
-        UpdateTimerRectSizes();
+        ResetTimer();
     }
 
     private void OnOptionsButtonPressed()
@@ -330,6 +345,70 @@ public class PomoTimer : Control
         lowerTimerColor = newColor;
         UpdateTimerRectColors();
         UpdateOptions();
+    }
+
+    private void OnWorkTimerDurationLineEditTextEntered(string newText)
+    {
+        SubmitTimerDuration(OptionsWorkTimerDurationLineEdit, newText, Phase.Work);
+    }
+
+    private void OnWorkTimerDurationLineEditFocusExited()
+    {
+        SubmitTimerDuration(OptionsWorkTimerDurationLineEdit, OptionsWorkTimerDurationLineEdit.Text, Phase.Work);
+    }
+
+    private void SubmitTimerDuration(LineEdit OptionsTimerDurationLineEdit, string newText, Phase phaseType)
+    {
+        int newMinutesAsInteger;
+        bool newTextIsNumeric = false;
+
+        // Try to parse the input, rounding to an integer if it's a float.
+        if (float.TryParse(newText, out float newMinutesAsFloat))
+        {
+            newMinutesAsInteger = Mathf.RoundToInt(newMinutesAsFloat);
+            newTextIsNumeric = true;
+        }
+        else if (int.TryParse(newText, out newMinutesAsInteger))
+        {
+            newTextIsNumeric = true;
+        }
+
+        // If input is valid, clamp and apply it.
+        if (newTextIsNumeric)
+        {
+            newMinutesAsInteger = Mathf.Clamp(newMinutesAsInteger, AbsoluteMinimumMinutesPerPhase, AbsoluteMaximumMinutesPerPhase);
+
+            switch (phaseType)
+            {
+                case Phase.Work:
+                {
+                    workMinutes = newMinutesAsInteger;
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+
+        // Apply the value to the text, regardless of whether it was successful.
+        switch (phaseType)
+        {
+            case Phase.Work:
+            {
+                OptionsTimerDurationLineEdit.Text = workMinutes.ToString();
+                break;
+            }
+            default:
+                break;
+        }
+        
+        // If in a fresh session, reset to apply the new values.
+        if (freshSessionAndShouldPlaySfxOnPlay)
+        {
+            ResetTimer();
+        }
+        
+        OptionsTimerDurationLineEdit.ReleaseFocus();
     }
 
     private void OnPinWindowButtonPressed()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Fonts/MainTimerFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/AnimatedTimerButton.cs" type="Script" id=2]
@@ -21,6 +21,8 @@
 [ext_resource path="res://Textures/FluentIcons/ic_fluent_checkmark_24_regular.png" type="Texture" id=19]
 [ext_resource path="res://Styles/ColorPickerButtonStyle.tres" type="StyleBox" id=20]
 [ext_resource path="res://Scripts/AnimatedColorPickerButton.cs" type="Script" id=21]
+[ext_resource path="res://Fonts/OptionsMenuValueLineEditFont.tres" type="DynamicFont" id=22]
+[ext_resource path="res://Styles/OptionsValueLineEditNormalStyle.tres" type="StyleBox" id=23]
 
 [sub_resource type="Animation" id=5]
 resource_name = "Hovered"
@@ -399,10 +401,11 @@ UpperTimerTextureRectNodePath = NodePath("TimerRects/VBoxContainer/UpperTimerTex
 LowerTimerTextureRectNodePath = NodePath("TimerRects/VBoxContainer/LowerTimerTextureRect")
 PinWindowButtonTextureRectNodePath = NodePath("AppControls/VBoxContainer/HBoxContainer/PinWindowButton/MarginContainer/PinWindowButtonTextureRect")
 OptionsPopupNodePath = NodePath("OptionsPopup")
-OptionsUpperTimerColorPickerButtonNodePathUHWHATWHY = NodePath("OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton")
-OptionsLowerTimerColorPickerButtonNodePathWHATWHYYY = NodePath("OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton")
+OptionsUpperTimerColorPickerButtonNodePath = NodePath("OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton")
+OptionsLowerTimerColorPickerButtonNodePath = NodePath("OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton")
 OptionsUpperTimerColorPickerTextureRectNodePath = NodePath("OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton/UpperTimerColorPickerTextureRect")
 OptionsLowerTimerColorPickerTextureRectNodePath = NodePath("OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton/LowerTimerColorPickerTextureRect")
+OptionsWorkTimerDurationLineEditNodePath = NodePath("OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer3/WorkTimerDurationLineEdit")
 PauseTexture = ExtResource( 6 )
 PlayTexture = ExtResource( 5 )
 PinWindowTexture = ExtResource( 12 )
@@ -411,7 +414,7 @@ WorkPhaseStartSfx = ExtResource( 11 )
 ShortBreakPhaseStartSfx = ExtResource( 10 )
 LongBreakPhaseStartSfx = ExtResource( 9 )
 SfxVolume = -5.0
-upperTimerColor = Color( 0.109804, 0.462745, 0.462745, 1 )
+upperTimerColor = Color( 1, 0.462745, 0.462745, 1 )
 lowerTimerColor = Color( 0.552941, 0.819608, 1, 1 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -723,7 +726,6 @@ anims/Normal = SubResource( 12 )
 anims/Pressed = SubResource( 13 )
 
 [node name="OptionsPopup" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -789,7 +791,7 @@ rect_min_size = Vector2( 0, 16 )
 [node name="VBoxContainer" type="VBoxContainer" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer"]
 margin_top = 45.0
 margin_right = 188.0
-margin_bottom = 101.0
+margin_bottom = 133.0
 custom_constants/separation = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer"]
@@ -797,7 +799,7 @@ margin_right = 188.0
 margin_bottom = 24.0
 custom_constants/separation = 0
 
-[node name="Label2" type="Label" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 margin_right = 85.0
 margin_bottom = 23.0
 custom_colors/font_color = Color( 0.168627, 0.168627, 0.168627, 1 )
@@ -852,7 +854,7 @@ margin_right = 188.0
 margin_bottom = 56.0
 custom_constants/separation = 0
 
-[node name="Label2" type="Label" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
 margin_right = 85.0
 margin_bottom = 23.0
 custom_colors/font_color = Color( 0.168627, 0.168627, 0.168627, 1 )
@@ -901,8 +903,46 @@ anims/Normal = SubResource( 21 )
 anims/Pressed = SubResource( 22 )
 anims/RESET = SubResource( 24 )
 
+[node name="HBoxContainer3" type="HBoxContainer" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer"]
+margin_top = 64.0
+margin_right = 188.0
+margin_bottom = 88.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
+margin_right = 102.0
+margin_bottom = 23.0
+custom_colors/font_color = Color( 0.168627, 0.168627, 0.168627, 1 )
+custom_fonts/font = ExtResource( 17 )
+text = "Work Duration"
+align = 1
+valign = 1
+
+[node name="Spacer" type="Control" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 102.0
+margin_right = 150.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="WorkTimerDurationLineEdit" type="LineEdit" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 150.0
+margin_right = 188.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_colors/selection_color = Color( 0.356863, 0.356863, 0.356863, 1 )
+custom_colors/cursor_color = Color( 0.360784, 0.360784, 0.360784, 1 )
+custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0.14902, 0.14902, 0.14902, 1 )
+custom_fonts/font = ExtResource( 22 )
+custom_styles/read_only = ExtResource( 23 )
+custom_styles/focus = ExtResource( 23 )
+custom_styles/normal = ExtResource( 23 )
+text = "25"
+align = 1
+caret_blink = true
+
 [node name="Spacer2" type="Control" parent="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer"]
-margin_top = 101.0
+margin_top = 133.0
 margin_right = 188.0
 margin_bottom = 156.0
 size_flags_vertical = 3
@@ -980,6 +1020,8 @@ anims/Pressed = SubResource( 16 )
 [connection signal="color_changed" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" to="." method="OnLowerTimerColorPickerButtonColorChanged"]
 [connection signal="mouse_entered" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" to="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" method="OnAnimatedColorPickerButtonMouseEntered"]
 [connection signal="mouse_exited" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" to="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" method="OnAnimatedColorPickerButtonMouseExited"]
+[connection signal="focus_exited" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer3/WorkTimerDurationLineEdit" to="." method="OnWorkTimerDurationLineEditFocusExited"]
+[connection signal="text_entered" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer3/WorkTimerDurationLineEdit" to="." method="OnWorkTimerDurationLineEditTextEntered"]
 [connection signal="button_down" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" to="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" method="OnAnimatedTimerButtonButtonDown"]
 [connection signal="button_up" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" to="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" method="OnAnimatedTimerButtonButtonUp"]
 [connection signal="mouse_entered" from="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" to="OptionsPopup/CenterContainer/Panel/MarginContainer/VBoxContainer/ConfirmOptionsButton" method="OnAnimatedTimerButtonMouseEntered"]
