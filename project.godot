@@ -17,8 +17,8 @@ run/low_processor_mode=true
 boot_splash/show_image=false
 boot_splash/image="res://Textures/FluentIcons/ic_fluent_timer_24_regular_dark.png"
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
-config/icon="res://Textures/FluentIcons/ic_fluent_timer_24_regular_dark.png"
-config/windows_native_icon="res://Textures/FluentIcons/ic_fluent_timer_24_regular_dark.ico"
+config/icon="res://Textures/Custom/Logo.png"
+config/windows_native_icon="res://Textures/Custom/Logo.ico"
 
 [display]
 
