@@ -19,7 +19,11 @@ public class PomoTimer : Control
     [Export] private NodePath LowerTimerTextureRectNodePath;
 
     [Export] private NodePath PinWindowButtonTextureRectNodePath;
+
     [Export] private NodePath OptionsPopupNodePath;
+
+    [Export] private NodePath OptionsSfxVolumeSliderNodePath;
+
     [Export] private NodePath OptionsUpperTimerColorPickerButtonNodePath;
     [Export] private NodePath OptionsLowerTimerColorPickerButtonNodePath;
     [Export] private NodePath OptionsUpperTimerColorPickerTextureRectNodePath;
@@ -39,7 +43,9 @@ public class PomoTimer : Control
     [Export] private AudioStream ShortBreakPhaseStartSfx;
     [Export] private AudioStream LongBreakPhaseStartSfx;
 
-    [Export] private float SfxVolume;
+    [Export] private float MinSfxVolumeDb;
+    [Export] private float MaxSfxVolumeDb;
+    [Export] private float DefaultSfxVolume;
 
     [Export] private Color upperTimerColor;
     [Export] private Color lowerTimerColor;
@@ -64,6 +70,7 @@ public class PomoTimer : Control
     private TextureRect LowerTimerTextureRect;
     private TextureRect PinWindowButtonTextureRect;
     private OptionsPopup OptionsPopup;
+    private HSlider OptionsSfxVolumeSlider;
     private ColorPickerButton OptionsTimerUpperColorPickerButton;
     private ColorPickerButton OptionsTimerLowerColorPickerButton;
     private TextureRect OptionsTimerUpperColorPickerTextureRect;
@@ -72,6 +79,8 @@ public class PomoTimer : Control
     private LineEdit OptionsShortBreakTimerDurationLineEdit;
     private LineEdit OptionsLongBreakTimerDurationLineEdit;
     private LineEdit OptionsLongBreakFrequencyLineEdit;
+
+    private float currentSfxVolume;
 
     private int workPhasesPerLongBreak = 5;
     private int workMinutes = 25;
@@ -97,7 +106,7 @@ public class PomoTimer : Control
     public override void _Ready()
     {
         AudioStreamPlayer = GetNode<AudioStreamPlayer>(AudioStreamPlayerNodePath);
-        AudioStreamPlayer.VolumeDb = SfxVolume;
+        SetSfxVolume(DefaultSfxVolume);
 
         TimeLabel = GetNode<Label>(TimeLabelNodePath);
         PauseButton = GetNode<Button>(PauseButtonNodePath);
@@ -110,6 +119,9 @@ public class PomoTimer : Control
         PinWindowButtonTextureRect = GetNode<TextureRect>(PinWindowButtonTextureRectNodePath);
 
         OptionsPopup = GetNode<OptionsPopup>(OptionsPopupNodePath);
+
+        OptionsSfxVolumeSlider = GetNode<HSlider>(OptionsSfxVolumeSliderNodePath);
+        OptionsSfxVolumeSlider.Value = DefaultSfxVolume;
 
         OptionsTimerUpperColorPickerButton = GetNode<ColorPickerButton>(OptionsUpperTimerColorPickerButtonNodePath);
         OptionsTimerLowerColorPickerButton = GetNode<ColorPickerButton>(OptionsLowerTimerColorPickerButtonNodePath);
@@ -344,6 +356,17 @@ public class PomoTimer : Control
     private void OnConfirmOptionsButtonPressed()
     {
         CloseOptionsPopup();
+    }
+
+    private void OnSfxVolumeSliderValueChanged(float newVolume)
+    {
+        SetSfxVolume(newVolume);
+    }
+
+    private void SetSfxVolume(float newVolume)
+    {
+        currentSfxVolume = Mathf.Lerp(MinSfxVolumeDb, MaxSfxVolumeDb, newVolume / 100.0f);
+        AudioStreamPlayer.VolumeDb = currentSfxVolume;
     }
 
     private void OnUpperTimerColorPickerButtonColorChanged(Color newColor)
