@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://Fonts/MainTimerFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/AnimatedTimerButton.cs" type="Script" id=2]
@@ -27,6 +27,7 @@
 [ext_resource path="res://Scripts/OptionsPopup.cs" type="Script" id=25]
 [ext_resource path="res://Styles/ColorPickerTheme.tres" type="Theme" id=26]
 [ext_resource path="res://Styles/VolumeSliderTheme.tres" type="Theme" id=27]
+[ext_resource path="res://Fonts/OptionsMenuSmallerParameterFont.tres" type="DynamicFont" id=28]
 
 [sub_resource type="Animation" id=5]
 resource_name = "Hovered"
@@ -218,6 +219,102 @@ tracks/0/keys = {
 "values": [ Vector2( 1.3, 1.3 ), Vector2( 0.8, 0.8 ) ]
 }
 
+[sub_resource type="Animation" id=28]
+resource_name = "Hovered"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetVolumeButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.3 ) ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "Normal"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetVolumeButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "Pressed"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetVolumeButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.3, 1.3 ), Vector2( 0.8, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=31]
+resource_name = "Hovered"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetUpperColorButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.3 ) ]
+}
+
+[sub_resource type="Animation" id=32]
+resource_name = "Normal"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetUpperColorButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "Pressed"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetUpperColorButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.3, 1.3 ), Vector2( 0.8, 0.8 ) ]
+}
+
 [sub_resource type="Animation" id=18]
 resource_name = "Hovered"
 step = 0.01
@@ -281,6 +378,54 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=34]
+resource_name = "Hovered"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetLowerColorButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.3 ) ]
+}
+
+[sub_resource type="Animation" id=35]
+resource_name = "Normal"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetLowerColorButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=36]
+resource_name = "Pressed"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetLowerColorButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.3, 1.3 ), Vector2( 0.8, 0.8 ) ]
+}
+
 [sub_resource type="Animation" id=20]
 resource_name = "Hovered"
 step = 0.01
@@ -342,6 +487,198 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=37]
+resource_name = "Hovered"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetWorkTimerDurationButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.3 ) ]
+}
+
+[sub_resource type="Animation" id=38]
+resource_name = "Normal"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetWorkTimerDurationButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=39]
+resource_name = "Pressed"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetWorkTimerDurationButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.3, 1.3 ), Vector2( 0.8, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=40]
+resource_name = "Hovered"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetShortBreakTimerDurationButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.3 ) ]
+}
+
+[sub_resource type="Animation" id=41]
+resource_name = "Normal"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetShortBreakTimerDurationButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=42]
+resource_name = "Pressed"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetShortBreakTimerDurationButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.3, 1.3 ), Vector2( 0.8, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=43]
+resource_name = "Hovered"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetLongBreakTimerDurationButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.3 ) ]
+}
+
+[sub_resource type="Animation" id=44]
+resource_name = "Normal"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetLongBreakTimerDurationButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=45]
+resource_name = "Pressed"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetLongBreakTimerDurationButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.3, 1.3 ), Vector2( 0.8, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=46]
+resource_name = "Hovered"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetLongBreakFrequencyButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.3 ) ]
+}
+
+[sub_resource type="Animation" id=47]
+resource_name = "Normal"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetLongBreakFrequencyButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=48]
+resource_name = "Pressed"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/ResetLongBreakFrequencyButtonTextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.3, 1.3 ), Vector2( 0.8, 0.8 ) ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -527,14 +864,21 @@ LowerTimerTextureRectNodePath = NodePath("TimerRects/VBoxContainer/LowerTimerTex
 PinWindowButtonNodePath = NodePath("AppControls/VBoxContainer/HBoxContainer/PinWindowButton")
 PinWindowButtonTextureRectNodePath = NodePath("AppControls/VBoxContainer/HBoxContainer/PinWindowButton/MarginContainer/PinWindowButtonTextureRect")
 OptionsPopupNodePath = NodePath("OptionsPopup")
+OptionsResetSfxVolumeButtonNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/ResetVolumeButton")
 OptionsSfxVolumeSliderNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/SfxVolumeHSlider")
+OptionsResetUpperTimerColorButtonNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/ResetUpperColorButton")
 OptionsUpperTimerColorPickerButtonNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton")
-OptionsLowerTimerColorPickerButtonNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton")
 OptionsUpperTimerColorPickerTextureRectNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton/UpperTimerColorPickerTextureRect")
+OptionsResetLowerTimerColorButtonNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/ResetLowerColorButton")
+OptionsLowerTimerColorPickerButtonNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton")
 OptionsLowerTimerColorPickerTextureRectNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton/LowerTimerColorPickerTextureRect")
+OptionsResetWorkTimerDurationButtonNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/ResetWorkTimerDurationButton")
 OptionsWorkTimerDurationLineEditNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/WorkTimerDurationLineEdit")
+OptionsResetShortBreakTimerDurationButtonNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ResetShortBreakTimerDurationButton")
 OptionsShortBreakTimerDurationLineEditNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ShortBreakTimerDurationLineEdit")
+OptionsResetLongBreakTimerDurationButtonNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/ResetLongBreakTimerDurationButton")
 OptionsLongBreakTimerDurationLineEditNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/LongBreakTimerDurationLineEdit")
+OptionsResetLongBreakFrequencyButtonNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/ResetLongBreakFrequencyButton")
 OptionsLongBreakFrequencyLineEditNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/LongBreakFrequencyLineEdit")
 PauseTexture = ExtResource( 6 )
 PlayTexture = ExtResource( 5 )
@@ -969,9 +1313,58 @@ valign = 1
 
 [node name="Spacer" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7"]
 margin_left = 45.0
-margin_right = 106.0
+margin_right = 78.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+
+[node name="ResetVolumeButton" type="Button" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7"]
+margin_left = 78.0
+margin_right = 102.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = ExtResource( 8 )
+script = ExtResource( 2 )
+AnimationPlayerNodePath = NodePath("AnimationPlayer")
+IconTextureRectNodePath = NodePath("MarginContainer/ResetVolumeButtonTextureRect")
+NormalAnimationName = "Normal"
+HoveredAnimationName = "Hovered"
+ButtonDownAnimationName = "Pressed"
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/ResetVolumeButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="ResetVolumeButtonTextureRect" type="TextureRect" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/ResetVolumeButton/MarginContainer"]
+modulate = Color( 0.552941, 0.552941, 0.552941, 1 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 20.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 14, 14 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/ResetVolumeButton"]
+anims/Hovered = SubResource( 28 )
+anims/Normal = SubResource( 29 )
+anims/Pressed = SubResource( 30 )
+
+[node name="Spacer2" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7"]
+margin_left = 102.0
+margin_right = 106.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 4, 0 )
+size_flags_vertical = 3
 
 [node name="SfxVolumeHSlider" type="HSlider" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7"]
 margin_left = 106.0
@@ -980,7 +1373,7 @@ margin_bottom = 24.0
 rect_min_size = Vector2( 72, 24 )
 theme = ExtResource( 27 )
 
-[node name="Spacer2" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7"]
+[node name="Spacer3" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7"]
 margin_left = 178.0
 margin_right = 182.0
 margin_bottom = 24.0
@@ -1005,9 +1398,58 @@ valign = 1
 
 [node name="Spacer" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
 margin_left = 68.0
-margin_right = 154.0
+margin_right = 126.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+
+[node name="ResetUpperColorButton" type="Button" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+margin_left = 126.0
+margin_right = 150.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = ExtResource( 8 )
+script = ExtResource( 2 )
+AnimationPlayerNodePath = NodePath("AnimationPlayer")
+IconTextureRectNodePath = NodePath("MarginContainer/ResetUpperColorButtonTextureRect")
+NormalAnimationName = "Normal"
+HoveredAnimationName = "Hovered"
+ButtonDownAnimationName = "Pressed"
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/ResetUpperColorButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="ResetUpperColorButtonTextureRect" type="TextureRect" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/ResetUpperColorButton/MarginContainer"]
+modulate = Color( 0.552941, 0.552941, 0.552941, 1 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 20.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 14, 14 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/ResetUpperColorButton"]
+anims/Hovered = SubResource( 31 )
+anims/Normal = SubResource( 32 )
+anims/Pressed = SubResource( 33 )
+
+[node name="Spacer2" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+margin_left = 150.0
+margin_right = 154.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 4, 0 )
+size_flags_vertical = 3
 
 [node name="UpperTimerColorPickerButton" type="ColorPickerButton" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
 self_modulate = Color( 1, 1, 1, 0 )
@@ -1044,7 +1486,7 @@ anims/Normal = SubResource( 17 )
 anims/Pressed = SubResource( 19 )
 anims/RESET = SubResource( 23 )
 
-[node name="Spacer2" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="Spacer3" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
 margin_left = 178.0
 margin_right = 182.0
 margin_bottom = 24.0
@@ -1069,9 +1511,58 @@ valign = 1
 
 [node name="Spacer" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
 margin_left = 70.0
-margin_right = 154.0
+margin_right = 126.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+
+[node name="ResetLowerColorButton" type="Button" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 126.0
+margin_right = 150.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = ExtResource( 8 )
+script = ExtResource( 2 )
+AnimationPlayerNodePath = NodePath("AnimationPlayer")
+IconTextureRectNodePath = NodePath("MarginContainer/ResetLowerColorButtonTextureRect")
+NormalAnimationName = "Normal"
+HoveredAnimationName = "Hovered"
+ButtonDownAnimationName = "Pressed"
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/ResetLowerColorButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="ResetLowerColorButtonTextureRect" type="TextureRect" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/ResetLowerColorButton/MarginContainer"]
+modulate = Color( 0.552941, 0.552941, 0.552941, 1 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 20.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 14, 14 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/ResetLowerColorButton"]
+anims/Hovered = SubResource( 34 )
+anims/Normal = SubResource( 35 )
+anims/Pressed = SubResource( 36 )
+
+[node name="Spacer2" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 150.0
+margin_right = 154.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 4, 0 )
+size_flags_vertical = 3
 
 [node name="LowerTimerColorPickerButton" type="ColorPickerButton" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
 self_modulate = Color( 1, 1, 1, 0 )
@@ -1108,7 +1599,7 @@ anims/Normal = SubResource( 21 )
 anims/Pressed = SubResource( 22 )
 anims/RESET = SubResource( 24 )
 
-[node name="Spacer2" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+[node name="Spacer3" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
 margin_left = 178.0
 margin_right = 182.0
 margin_bottom = 24.0
@@ -1133,9 +1624,58 @@ valign = 1
 
 [node name="Spacer" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
 margin_left = 63.0
-margin_right = 140.0
+margin_right = 112.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+
+[node name="ResetWorkTimerDurationButton" type="Button" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 112.0
+margin_right = 136.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = ExtResource( 8 )
+script = ExtResource( 2 )
+AnimationPlayerNodePath = NodePath("AnimationPlayer")
+IconTextureRectNodePath = NodePath("MarginContainer/ResetWorkTimerDurationButtonTextureRect")
+NormalAnimationName = "Normal"
+HoveredAnimationName = "Hovered"
+ButtonDownAnimationName = "Pressed"
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/ResetWorkTimerDurationButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="ResetWorkTimerDurationButtonTextureRect" type="TextureRect" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/ResetWorkTimerDurationButton/MarginContainer"]
+modulate = Color( 0.552941, 0.552941, 0.552941, 1 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 20.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 14, 14 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/ResetWorkTimerDurationButton"]
+anims/Hovered = SubResource( 37 )
+anims/Normal = SubResource( 38 )
+anims/Pressed = SubResource( 39 )
+
+[node name="Spacer2" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 136.0
+margin_right = 140.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 4, 0 )
+size_flags_vertical = 3
 
 [node name="WorkTimerDurationLineEdit" type="LineEdit" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
 margin_left = 140.0
@@ -1154,7 +1694,7 @@ text = "25"
 align = 1
 caret_blink = true
 
-[node name="Spacer2" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+[node name="Spacer3" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
 margin_left = 178.0
 margin_right = 182.0
 margin_bottom = 24.0
@@ -1179,9 +1719,58 @@ valign = 1
 
 [node name="Spacer" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
 margin_left = 98.0
-margin_right = 140.0
+margin_right = 112.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+
+[node name="ResetShortBreakTimerDurationButton" type="Button" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+margin_left = 112.0
+margin_right = 136.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = ExtResource( 8 )
+script = ExtResource( 2 )
+AnimationPlayerNodePath = NodePath("AnimationPlayer")
+IconTextureRectNodePath = NodePath("MarginContainer/ResetShortBreakTimerDurationButtonTextureRect")
+NormalAnimationName = "Normal"
+HoveredAnimationName = "Hovered"
+ButtonDownAnimationName = "Pressed"
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ResetShortBreakTimerDurationButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="ResetShortBreakTimerDurationButtonTextureRect" type="TextureRect" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ResetShortBreakTimerDurationButton/MarginContainer"]
+modulate = Color( 0.552941, 0.552941, 0.552941, 1 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 20.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 14, 14 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ResetShortBreakTimerDurationButton"]
+anims/Hovered = SubResource( 40 )
+anims/Normal = SubResource( 41 )
+anims/Pressed = SubResource( 42 )
+
+[node name="Spacer2" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+margin_left = 136.0
+margin_right = 140.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 4, 0 )
+size_flags_vertical = 3
 
 [node name="ShortBreakTimerDurationLineEdit" type="LineEdit" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
 margin_left = 140.0
@@ -1200,7 +1789,7 @@ text = "5"
 align = 1
 caret_blink = true
 
-[node name="Spacer2" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+[node name="Spacer3" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
 margin_left = 178.0
 margin_right = 182.0
 margin_bottom = 24.0
@@ -1225,9 +1814,58 @@ valign = 1
 
 [node name="Spacer" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5"]
 margin_left = 96.0
-margin_right = 140.0
+margin_right = 112.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+
+[node name="ResetLongBreakTimerDurationButton" type="Button" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5"]
+margin_left = 112.0
+margin_right = 136.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = ExtResource( 8 )
+script = ExtResource( 2 )
+AnimationPlayerNodePath = NodePath("AnimationPlayer")
+IconTextureRectNodePath = NodePath("MarginContainer/ResetLongBreakTimerDurationButtonTextureRect")
+NormalAnimationName = "Normal"
+HoveredAnimationName = "Hovered"
+ButtonDownAnimationName = "Pressed"
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/ResetLongBreakTimerDurationButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="ResetLongBreakTimerDurationButtonTextureRect" type="TextureRect" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/ResetLongBreakTimerDurationButton/MarginContainer"]
+modulate = Color( 0.552941, 0.552941, 0.552941, 1 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 20.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 14, 14 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/ResetLongBreakTimerDurationButton"]
+anims/Hovered = SubResource( 43 )
+anims/Normal = SubResource( 44 )
+anims/Pressed = SubResource( 45 )
+
+[node name="Spacer2" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5"]
+margin_left = 136.0
+margin_right = 140.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 4, 0 )
+size_flags_vertical = 3
 
 [node name="LongBreakTimerDurationLineEdit" type="LineEdit" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5"]
 margin_left = 140.0
@@ -1246,7 +1884,7 @@ text = "30"
 align = 1
 caret_blink = true
 
-[node name="Spacer2" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5"]
+[node name="Spacer3" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5"]
 margin_left = 178.0
 margin_right = 182.0
 margin_bottom = 24.0
@@ -1260,20 +1898,69 @@ margin_bottom = 224.0
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6"]
-margin_top = 2.0
-margin_right = 126.0
-margin_bottom = 21.0
+margin_top = 4.0
+margin_right = 109.0
+margin_bottom = 20.0
 custom_colors/font_color = Color( 0.168627, 0.168627, 0.168627, 1 )
-custom_fonts/font = ExtResource( 17 )
+custom_fonts/font = ExtResource( 28 )
 text = "Long Break Frequency"
 align = 1
 valign = 1
 
 [node name="Spacer" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6"]
-margin_left = 126.0
-margin_right = 140.0
+margin_left = 109.0
+margin_right = 112.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+
+[node name="ResetLongBreakFrequencyButton" type="Button" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6"]
+margin_left = 112.0
+margin_right = 136.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = ExtResource( 8 )
+script = ExtResource( 2 )
+AnimationPlayerNodePath = NodePath("AnimationPlayer")
+IconTextureRectNodePath = NodePath("MarginContainer/ResetLongBreakFrequencyButtonTextureRect")
+NormalAnimationName = "Normal"
+HoveredAnimationName = "Hovered"
+ButtonDownAnimationName = "Pressed"
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/ResetLongBreakFrequencyButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="ResetLongBreakFrequencyButtonTextureRect" type="TextureRect" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/ResetLongBreakFrequencyButton/MarginContainer"]
+modulate = Color( 0.552941, 0.552941, 0.552941, 1 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 20.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 14, 14 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/ResetLongBreakFrequencyButton"]
+anims/Hovered = SubResource( 46 )
+anims/Normal = SubResource( 47 )
+anims/Pressed = SubResource( 48 )
+
+[node name="Spacer2" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6"]
+margin_left = 136.0
+margin_right = 140.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 4, 0 )
+size_flags_vertical = 3
 
 [node name="LongBreakFrequencyLineEdit" type="LineEdit" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6"]
 margin_left = 140.0
@@ -1292,7 +1979,7 @@ text = "5"
 align = 1
 caret_blink = true
 
-[node name="Spacer2" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6"]
+[node name="Spacer3" type="Control" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6"]
 margin_left = 178.0
 margin_right = 182.0
 margin_bottom = 24.0
@@ -1378,23 +2065,65 @@ anims/Show = SubResource( 26 )
 [connection signal="mouse_exited" from="AppControls/VBoxContainer/HBoxContainer/PinWindowButton" to="AppControls/VBoxContainer/HBoxContainer/PinWindowButton" method="OnAnimatedTimerButtonMouseExited"]
 [connection signal="pressed" from="AppControls/VBoxContainer/HBoxContainer/PinWindowButton" to="." method="OnPinWindowButtonPressed"]
 [connection signal="pressed" from="OptionsPopup/OptionsPopupOverlayButton" to="." method="OnOptionsPopupOverlayButtonPressed"]
+[connection signal="button_down" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/ResetVolumeButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/ResetVolumeButton" method="OnAnimatedTimerButtonButtonDown"]
+[connection signal="button_up" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/ResetVolumeButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/ResetVolumeButton" method="OnAnimatedTimerButtonButtonUp"]
+[connection signal="mouse_entered" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/ResetVolumeButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/ResetVolumeButton" method="OnAnimatedTimerButtonMouseEntered"]
+[connection signal="mouse_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/ResetVolumeButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/ResetVolumeButton" method="OnAnimatedTimerButtonMouseExited"]
+[connection signal="pressed" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/ResetVolumeButton" to="." method="OnResetVolumeButtonPressed"]
+[connection signal="visibility_changed" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/ResetVolumeButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/ResetVolumeButton" method="OnAnimatedTimerButtonMouseExited"]
 [connection signal="value_changed" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/SfxVolumeHSlider" to="." method="OnSfxVolumeSliderValueChanged"]
+[connection signal="button_down" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/ResetUpperColorButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/ResetUpperColorButton" method="OnAnimatedTimerButtonButtonDown"]
+[connection signal="button_up" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/ResetUpperColorButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/ResetUpperColorButton" method="OnAnimatedTimerButtonButtonUp"]
+[connection signal="mouse_entered" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/ResetUpperColorButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/ResetUpperColorButton" method="OnAnimatedTimerButtonMouseEntered"]
+[connection signal="mouse_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/ResetUpperColorButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/ResetUpperColorButton" method="OnAnimatedTimerButtonMouseExited"]
+[connection signal="pressed" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/ResetUpperColorButton" to="." method="OnResetUpperColorButtonPressed"]
+[connection signal="visibility_changed" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/ResetUpperColorButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/ResetUpperColorButton" method="OnAnimatedTimerButtonMouseExited"]
 [connection signal="button_down" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" method="OnAnimatedColorPickerButtonButtonDown"]
 [connection signal="button_up" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" method="OnAnimatedColorPickerButtonButtonUp"]
 [connection signal="color_changed" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" to="." method="OnUpperTimerColorPickerButtonColorChanged"]
 [connection signal="mouse_entered" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" method="OnAnimatedColorPickerButtonMouseEntered"]
 [connection signal="mouse_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/UpperTimerColorPickerButton" method="OnAnimatedColorPickerButtonMouseExited"]
+[connection signal="button_down" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/ResetLowerColorButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/ResetLowerColorButton" method="OnAnimatedTimerButtonButtonDown"]
+[connection signal="button_up" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/ResetLowerColorButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/ResetLowerColorButton" method="OnAnimatedTimerButtonButtonUp"]
+[connection signal="mouse_entered" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/ResetLowerColorButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/ResetLowerColorButton" method="OnAnimatedTimerButtonMouseEntered"]
+[connection signal="mouse_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/ResetLowerColorButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/ResetLowerColorButton" method="OnAnimatedTimerButtonMouseExited"]
+[connection signal="pressed" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/ResetLowerColorButton" to="." method="OnResetLowerColorButtonPressed"]
+[connection signal="visibility_changed" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/ResetLowerColorButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/ResetLowerColorButton" method="OnAnimatedTimerButtonMouseExited"]
 [connection signal="button_down" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" method="OnAnimatedColorPickerButtonButtonDown"]
 [connection signal="button_up" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" method="OnAnimatedColorPickerButtonButtonUp"]
 [connection signal="color_changed" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" to="." method="OnLowerTimerColorPickerButtonColorChanged"]
 [connection signal="mouse_entered" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" method="OnAnimatedColorPickerButtonMouseEntered"]
 [connection signal="mouse_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/LowerTimerColorPickerButton" method="OnAnimatedColorPickerButtonMouseExited"]
+[connection signal="button_down" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/ResetWorkTimerDurationButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/ResetWorkTimerDurationButton" method="OnAnimatedTimerButtonButtonDown"]
+[connection signal="button_up" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/ResetWorkTimerDurationButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/ResetWorkTimerDurationButton" method="OnAnimatedTimerButtonButtonUp"]
+[connection signal="mouse_entered" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/ResetWorkTimerDurationButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/ResetWorkTimerDurationButton" method="OnAnimatedTimerButtonMouseEntered"]
+[connection signal="mouse_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/ResetWorkTimerDurationButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/ResetWorkTimerDurationButton" method="OnAnimatedTimerButtonMouseExited"]
+[connection signal="pressed" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/ResetWorkTimerDurationButton" to="." method="OnResetWorkTimerDurationButtonPressed"]
+[connection signal="visibility_changed" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/ResetWorkTimerDurationButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/ResetWorkTimerDurationButton" method="OnAnimatedTimerButtonMouseExited"]
 [connection signal="focus_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/WorkTimerDurationLineEdit" to="." method="OnWorkTimerDurationLineEditFocusExited"]
 [connection signal="text_entered" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/WorkTimerDurationLineEdit" to="." method="OnWorkTimerDurationLineEditTextEntered"]
+[connection signal="button_down" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ResetShortBreakTimerDurationButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ResetShortBreakTimerDurationButton" method="OnAnimatedTimerButtonButtonDown"]
+[connection signal="button_up" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ResetShortBreakTimerDurationButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ResetShortBreakTimerDurationButton" method="OnAnimatedTimerButtonButtonUp"]
+[connection signal="mouse_entered" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ResetShortBreakTimerDurationButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ResetShortBreakTimerDurationButton" method="OnAnimatedTimerButtonMouseEntered"]
+[connection signal="mouse_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ResetShortBreakTimerDurationButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ResetShortBreakTimerDurationButton" method="OnAnimatedTimerButtonMouseExited"]
+[connection signal="pressed" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ResetShortBreakTimerDurationButton" to="." method="OnResetShortBreakTimerDurationButtonPressed"]
+[connection signal="visibility_changed" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ResetShortBreakTimerDurationButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ResetShortBreakTimerDurationButton" method="OnAnimatedTimerButtonMouseExited"]
 [connection signal="focus_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ShortBreakTimerDurationLineEdit" to="." method="OnShortBreakTimerDurationLineEditFocusExited"]
 [connection signal="text_entered" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/ShortBreakTimerDurationLineEdit" to="." method="OnShortBreakTimerDurationLineEditTextEntered"]
+[connection signal="button_down" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/ResetLongBreakTimerDurationButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/ResetLongBreakTimerDurationButton" method="OnAnimatedTimerButtonButtonDown"]
+[connection signal="button_up" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/ResetLongBreakTimerDurationButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/ResetLongBreakTimerDurationButton" method="OnAnimatedTimerButtonButtonUp"]
+[connection signal="mouse_entered" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/ResetLongBreakTimerDurationButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/ResetLongBreakTimerDurationButton" method="OnAnimatedTimerButtonMouseEntered"]
+[connection signal="mouse_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/ResetLongBreakTimerDurationButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/ResetLongBreakTimerDurationButton" method="OnAnimatedTimerButtonMouseExited"]
+[connection signal="pressed" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/ResetLongBreakTimerDurationButton" to="." method="OnResetLongBreakTimerDurationButtonPressed"]
+[connection signal="visibility_changed" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/ResetLongBreakTimerDurationButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/ResetLongBreakTimerDurationButton" method="OnAnimatedTimerButtonMouseExited"]
 [connection signal="focus_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/LongBreakTimerDurationLineEdit" to="." method="OnLongBreakTimerDurationLineEditFocusExited"]
 [connection signal="text_entered" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/LongBreakTimerDurationLineEdit" to="." method="OnLongBreakTimerDurationLineEditTextEntered"]
+[connection signal="button_down" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/ResetLongBreakFrequencyButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/ResetLongBreakFrequencyButton" method="OnAnimatedTimerButtonButtonDown"]
+[connection signal="button_up" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/ResetLongBreakFrequencyButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/ResetLongBreakFrequencyButton" method="OnAnimatedTimerButtonButtonUp"]
+[connection signal="mouse_entered" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/ResetLongBreakFrequencyButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/ResetLongBreakFrequencyButton" method="OnAnimatedTimerButtonMouseEntered"]
+[connection signal="mouse_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/ResetLongBreakFrequencyButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/ResetLongBreakFrequencyButton" method="OnAnimatedTimerButtonMouseExited"]
+[connection signal="pressed" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/ResetLongBreakFrequencyButton" to="." method="OnResetLongBreakFrequencyButtonPressed"]
+[connection signal="visibility_changed" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/ResetLongBreakFrequencyButton" to="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/ResetLongBreakFrequencyButton" method="OnAnimatedTimerButtonMouseExited"]
 [connection signal="focus_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/LongBreakFrequencyLineEdit" to="." method="OnLongBreakTimerDurationLineEditFocusExited"]
 [connection signal="focus_exited" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/LongBreakFrequencyLineEdit" to="." method="OnLongBreakFrequencyLineEditFocusExited"]
 [connection signal="text_entered" from="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/LongBreakFrequencyLineEdit" to="." method="OnLongBreakFrequencyLineEditTextEntered"]
