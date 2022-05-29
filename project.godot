@@ -12,6 +12,7 @@ config_version=4
 
 config/name="Pomo"
 run/main_scene="res://Scenes/Main.tscn"
+config/use_custom_user_dir=true
 run/low_processor_mode=true
 boot_splash/show_image=false
 boot_splash/image="res://Textures/FluentIcons/ic_fluent_timer_24_regular_dark.png"
