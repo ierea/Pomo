@@ -888,6 +888,13 @@ WorkPhaseStartSfx = ExtResource( 11 )
 ShortBreakPhaseStartSfx = ExtResource( 10 )
 LongBreakPhaseStartSfx = ExtResource( 9 )
 UserPreferencesFileName = "UserPreferences.yaml"
+PauseTimerActionName = "PauseTimer"
+PlayTimerActionName = "PlayTimer"
+ResetTimerActionName = "ResetTimer"
+OpenOptionsActionName = "OpenOptions"
+CloseOptionsActionName = "CloseOptions"
+PinWindowActionName = "PinWindow"
+UnpinWindowActionName = "UnpinWindow"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -10.0

@@ -57,6 +57,14 @@ public class PomoTimer : Control
 
     [Export] private string UserPreferencesFileName;
 
+    [Export] private string PauseTimerActionName;
+    [Export] private string PlayTimerActionName;
+    [Export] private string ResetTimerActionName;
+    [Export] private string OpenOptionsActionName;
+    [Export] private string CloseOptionsActionName;
+    [Export] private string PinWindowActionName;
+    [Export] private string UnpinWindowActionName;
+
     private const int SpeedMultiplier = 1;
     private const int MillisecondsInASecond = 1000;
     private const int SecondsInAMinute = 60;
@@ -205,6 +213,35 @@ public class PomoTimer : Control
             UpdateTimerRectSizes();
         }
 
+        if (!OptionsPopup.Visible)
+        {
+            if (Input.IsActionJustPressed(PauseTimerActionName) || Input.IsActionJustPressed(PlayTimerActionName))
+            {
+                TogglePauseTimer();
+            }
+            
+            if (Input.IsActionJustPressed(ResetTimerActionName))
+            {
+                ResetTimer();
+            }
+
+            if (Input.IsActionJustPressed(OpenOptionsActionName))
+            {
+                ShowOptionsPopup();
+            }
+
+            if (Input.IsActionJustPressed(PinWindowActionName) || Input.IsActionJustPressed(UnpinWindowActionName))
+            {
+                TogglePinWindow();
+            }
+        }
+        else
+        {
+            if (Input.IsActionJustPressed(CloseOptionsActionName))
+            {
+                CloseOptionsPopup();
+            }
+        }
     }
 
     private void UpdateTimerText()
@@ -348,12 +385,12 @@ public class PomoTimer : Control
         workPhasesSinceLongBreak = 0;
     }
 
-    private void CloseOptionsPopup()
+    private void OnPauseButtonPressed()
     {
-        OptionsPopup.HideOptionsPopup();
+        TogglePauseTimer();
     }
 
-    private void OnPauseButtonPressed()
+    void TogglePauseTimer()
     {
         if (freshSessionAndShouldPlaySfxOnPlay)
         {
@@ -378,12 +415,6 @@ public class PomoTimer : Control
     private void OnResetButtonPressed()
     {
         ResetTimer();
-    }
-
-    private void OnOptionsButtonPressed()
-    {
-        ValidateResetButtons();
-        OptionsPopup.ShowOptionsPopup();
     }
 
     // Hide reset buttons if values are default
@@ -465,6 +496,22 @@ public class PomoTimer : Control
             OptionsResetLongBreakFrequencyButton.Visible = true;
             OptionsResetLongBreakFrequencyButton.Disabled = false;
         }
+    }
+
+    private void OnOptionsButtonPressed()
+    {
+        ShowOptionsPopup();
+    }
+
+    private void ShowOptionsPopup()
+    {
+        ValidateResetButtons();
+        OptionsPopup.ShowOptionsPopup();
+    }
+
+    private void CloseOptionsPopup()
+    {
+        OptionsPopup.HideOptionsPopup();
     }
 
     private void SaveUserPreferencesToFile()
@@ -724,9 +771,12 @@ public class PomoTimer : Control
 
     private void OnPinWindowButtonPressed()
     {
-        bool isCurrentlyAlwaysOnTop = OS.IsWindowAlwaysOnTop();
+        TogglePinWindow();
+    }
 
-        if (isCurrentlyAlwaysOnTop)
+    private void TogglePinWindow()
+    {
+        if (OS.IsWindowAlwaysOnTop())
         {
             PinWindowButtonTextureRect.Texture = PinWindowTexture;
             OS.SetWindowAlwaysOnTop(false);
