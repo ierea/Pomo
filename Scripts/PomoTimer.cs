@@ -18,6 +18,7 @@ public class PomoTimer : Control
     [Export] private NodePath UpperTimerTextureRectNodePath;
     [Export] private NodePath LowerTimerTextureRectNodePath;
 
+    [Export] private NodePath PinWindowButtonNodePath;
     [Export] private NodePath PinWindowButtonTextureRectNodePath;
 
     [Export] private NodePath OptionsPopupNodePath;
@@ -65,6 +66,7 @@ public class PomoTimer : Control
     private Button ResetButton;
     private TextureRect UpperTimerTextureRect;
     private TextureRect LowerTimerTextureRect;
+    private Button PinWindowButton;
     private TextureRect PinWindowButtonTextureRect;
     private OptionsPopup OptionsPopup;
     private HSlider OptionsSfxVolumeSlider;
@@ -104,6 +106,13 @@ public class PomoTimer : Control
 
         UpperTimerTextureRect = GetNode<TextureRect>(UpperTimerTextureRectNodePath);
         LowerTimerTextureRect = GetNode<TextureRect>(LowerTimerTextureRectNodePath);
+
+        PinWindowButton = GetNode<Button>(PinWindowButtonNodePath);
+        if (OS.GetName() == "HTML5")
+        {
+            PinWindowButton.Visible = false;
+            PinWindowButton.Disabled = true;
+        }
 
         PinWindowButtonTextureRect = GetNode<TextureRect>(PinWindowButtonTextureRectNodePath);
 

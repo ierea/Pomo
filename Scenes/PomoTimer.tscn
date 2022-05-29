@@ -524,6 +524,7 @@ PauseButtonTextureRectNodePath = NodePath("TimerControls/VBoxContainer/HBoxConta
 ResetButtonNodePath = NodePath("TimerControls/VBoxContainer/HBoxContainer/ResetButton")
 UpperTimerTextureRectNodePath = NodePath("TimerRects/VBoxContainer/UpperTimerTextureRect")
 LowerTimerTextureRectNodePath = NodePath("TimerRects/VBoxContainer/LowerTimerTextureRect")
+PinWindowButtonNodePath = NodePath("AppControls/VBoxContainer/HBoxContainer/PinWindowButton")
 PinWindowButtonTextureRectNodePath = NodePath("AppControls/VBoxContainer/HBoxContainer/PinWindowButton/MarginContainer/PinWindowButtonTextureRect")
 OptionsPopupNodePath = NodePath("OptionsPopup")
 OptionsSfxVolumeSliderNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer7/SfxVolumeHSlider")
