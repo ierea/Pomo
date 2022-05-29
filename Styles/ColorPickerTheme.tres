@@ -171,6 +171,10 @@ size = Vector2( 16, 16 )
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.501961, 0.501961, 0.501961, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 2.0
@@ -178,6 +182,10 @@ content_margin_right = 2.0
 content_margin_top = 2.0
 content_margin_bottom = 2.0
 bg_color = Color( 0.890196, 0.890196, 0.890196, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="Image" id=53]
 data = {
@@ -245,9 +253,12 @@ HSlider/icons/grabber_highlight = SubResource( 40 )
 HSlider/styles/grabber_area = SubResource( 3 )
 HSlider/styles/grabber_area_highlight = SubResource( 3 )
 HSlider/styles/slider = SubResource( 1 )
-Label/colors/font_color = Color( 0.203922, 0.203922, 0.203922, 1 )
+Label/colors/font_color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
+Label/fonts/font = ExtResource( 2 )
+LineEdit/colors/cursor_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 LineEdit/colors/font_color = Color( 0.129412, 0.129412, 0.129412, 1 )
 LineEdit/colors/font_color_selected = Color( 0.933333, 0.933333, 0.933333, 1 )
+LineEdit/fonts/font = ExtResource( 2 )
 LineEdit/styles/focus = ExtResource( 4 )
 LineEdit/styles/normal = ExtResource( 4 )
 LineEdit/styles/read_only = ExtResource( 4 )
