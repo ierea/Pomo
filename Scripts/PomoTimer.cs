@@ -45,10 +45,8 @@ public class PomoTimer : Control
 
     [Export] private float MinSfxVolumeDb;
     [Export] private float MaxSfxVolumeDb;
-    [Export] private float DefaultSfxVolume;
 
-    [Export] private Color upperTimerColor;
-    [Export] private Color lowerTimerColor;
+    [Export] private string UserPreferencesFileName;
 
     private const int SpeedMultiplier = 1;
     private const int MillisecondsInASecond = 1000;
@@ -59,7 +57,6 @@ public class PomoTimer : Control
 
     private const int AbsoluteMinimumWorkPhasesPerLongBreak = 1;
     private const int AbsoluteMaximumWorkPhasesPerLongBreak = 9999;
-
 
     private AudioStreamPlayer AudioStreamPlayer;
     private Label TimeLabel;
@@ -80,12 +77,7 @@ public class PomoTimer : Control
     private LineEdit OptionsLongBreakTimerDurationLineEdit;
     private LineEdit OptionsLongBreakFrequencyLineEdit;
 
-    private float currentSfxVolume;
-
-    private int workPhasesPerLongBreak = 5;
-    private int workMinutes = 25;
-    private int shortBreakMinutes = 5;
-    private int longBreakMinutes = 30;
+    private UserPreferences userPreferences;
 
     private Phase currentPhase;
     private int currentMinutesRemaining;
@@ -96,17 +88,14 @@ public class PomoTimer : Control
     private bool freshSessionAndShouldPlaySfxOnPlay;
     private int workPhasesSinceLongBreak;
 
-
-    public PomoTimer()
-    {
-        ResetTimerValues();
-    }
-
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        userPreferences = UserPreferences.CreateFromFile(UserPreferencesFileName);
+        ResetTimerValues();
+
         AudioStreamPlayer = GetNode<AudioStreamPlayer>(AudioStreamPlayerNodePath);
-        SetSfxVolume(DefaultSfxVolume);
+        SetSfxVolume(userPreferences.SfxVolume);
 
         TimeLabel = GetNode<Label>(TimeLabelNodePath);
         PauseButton = GetNode<Button>(PauseButtonNodePath);
@@ -121,7 +110,7 @@ public class PomoTimer : Control
         OptionsPopup = GetNode<OptionsPopup>(OptionsPopupNodePath);
 
         OptionsSfxVolumeSlider = GetNode<HSlider>(OptionsSfxVolumeSliderNodePath);
-        OptionsSfxVolumeSlider.Value = DefaultSfxVolume;
+        OptionsSfxVolumeSlider.Value = userPreferences.SfxVolume;
 
         OptionsTimerUpperColorPickerButton = GetNode<ColorPickerButton>(OptionsUpperTimerColorPickerButtonNodePath);
         OptionsTimerLowerColorPickerButton = GetNode<ColorPickerButton>(OptionsLowerTimerColorPickerButtonNodePath);
@@ -136,7 +125,7 @@ public class PomoTimer : Control
         UpdateTimerText();
         UpdateTimerRectSizes();
         UpdateTimerRectColors();
-        UpdateOptions();
+        UpdateColorPickerTextureRects();
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -210,17 +199,17 @@ public class PomoTimer : Control
 
     private void UpdateTimerRectColors()
     {
-        UpperTimerTextureRect.Modulate = upperTimerColor;
-        LowerTimerTextureRect.Modulate = lowerTimerColor;
+        UpperTimerTextureRect.Modulate = userPreferences.UpperTimerColor;
+        LowerTimerTextureRect.Modulate = userPreferences.LowerTimerColor;
     }
 
-    private void UpdateOptions()
+    private void UpdateColorPickerTextureRects()
     {
-        OptionsTimerUpperColorPickerButton.Color = upperTimerColor;
-        OptionsTimerLowerColorPickerButton.Color = lowerTimerColor;
+        OptionsTimerUpperColorPickerButton.Color = userPreferences.UpperTimerColor;
+        OptionsTimerLowerColorPickerButton.Color = userPreferences.LowerTimerColor;
 
-        OptionsTimerUpperColorPickerTextureRect.Modulate = upperTimerColor;
-        OptionsTimerLowerColorPickerTextureRect.Modulate = lowerTimerColor;
+        OptionsTimerUpperColorPickerTextureRect.Modulate = userPreferences.UpperTimerColor;
+        OptionsTimerLowerColorPickerTextureRect.Modulate = userPreferences.LowerTimerColor;
     }
 
     private void GoToNextTimerPhase()
@@ -230,7 +219,7 @@ public class PomoTimer : Control
             case Phase.Work:
             {
                 workPhasesSinceLongBreak += 1;
-                if (workPhasesSinceLongBreak >= workPhasesPerLongBreak)
+                if (workPhasesSinceLongBreak >= userPreferences.LongBreakFrequency)
                 {
                     InitializeNewTimerPhase(Phase.LongBreak);
                 }
@@ -259,7 +248,7 @@ public class PomoTimer : Control
         {
             case Phase.Work:
             {
-                currentMinutesRemaining = workMinutes;
+                currentMinutesRemaining = userPreferences.WorkMinutes;
 
                 AudioStreamPlayer.Stream = WorkPhaseStartSfx;
                 AudioStreamPlayer.Play();
@@ -267,7 +256,7 @@ public class PomoTimer : Control
             }
             case Phase.ShortBreak:
             {
-                currentMinutesRemaining = shortBreakMinutes;
+                currentMinutesRemaining = userPreferences.ShortBreakMinutes;
 
                 AudioStreamPlayer.Stream = ShortBreakPhaseStartSfx;
                 AudioStreamPlayer.Play();
@@ -275,7 +264,7 @@ public class PomoTimer : Control
             }
             case Phase.LongBreak:
             {
-                currentMinutesRemaining = longBreakMinutes;
+                currentMinutesRemaining = userPreferences.LongBreakMinutes;
                 workPhasesSinceLongBreak = 0;
 
                 AudioStreamPlayer.Stream = LongBreakPhaseStartSfx;
@@ -303,7 +292,7 @@ public class PomoTimer : Control
     {
         timerActive = false;
         freshSessionAndShouldPlaySfxOnPlay = true;
-        currentMinutesRemaining = workMinutes;
+        currentMinutesRemaining = userPreferences.WorkMinutes;
         currentPhaseTotalMinutes = currentMinutesRemaining;
         currentSecondsRemaining = 0;
         currentMillisecondsRemaining = MillisecondsInASecond;
@@ -348,6 +337,11 @@ public class PomoTimer : Control
         OptionsPopup.ShowOptionsPopup();
     }
 
+    private void SaveUserPreferencesToFile()
+    {
+        userPreferences.SaveToFile(UserPreferencesFileName);
+    }
+
     private void OnOptionsPopupOverlayButtonPressed()
     {
         CloseOptionsPopup();
@@ -365,22 +359,25 @@ public class PomoTimer : Control
 
     private void SetSfxVolume(float newVolume)
     {
-        currentSfxVolume = Mathf.Lerp(MinSfxVolumeDb, MaxSfxVolumeDb, newVolume / 100.0f);
-        AudioStreamPlayer.VolumeDb = currentSfxVolume;
+        userPreferences.SfxVolume = newVolume;
+        AudioStreamPlayer.VolumeDb = Mathf.Lerp(MinSfxVolumeDb, MaxSfxVolumeDb, userPreferences.SfxVolume / 100.0f);
+        SaveUserPreferencesToFile();
     }
 
     private void OnUpperTimerColorPickerButtonColorChanged(Color newColor)
     {
-        upperTimerColor = newColor;
+        userPreferences.UpperTimerColor = newColor;
         UpdateTimerRectColors();
-        UpdateOptions();
+        UpdateColorPickerTextureRects();
+        SaveUserPreferencesToFile();
     }
 
     private void OnLowerTimerColorPickerButtonColorChanged(Color newColor)
     {
-        lowerTimerColor = newColor;
+        userPreferences.LowerTimerColor = newColor;
         UpdateTimerRectColors();
-        UpdateOptions();
+        UpdateColorPickerTextureRects();
+        SaveUserPreferencesToFile();
     }
 
     private void OnWorkTimerDurationLineEditTextEntered(string newText)
@@ -438,17 +435,17 @@ public class PomoTimer : Control
             {
                 case Phase.Work:
                 {
-                    workMinutes = newMinutesAsInteger;
+                    userPreferences.WorkMinutes = newMinutesAsInteger;
                     break;
                 }
                 case Phase.ShortBreak:
                 {
-                    shortBreakMinutes = newMinutesAsInteger;
+                    userPreferences.ShortBreakMinutes = newMinutesAsInteger;
                     break;
                 }
                 case Phase.LongBreak:
                 {
-                    longBreakMinutes = newMinutesAsInteger;
+                    userPreferences.LongBreakMinutes = newMinutesAsInteger;
                     break;
                 }
                 default:
@@ -461,22 +458,24 @@ public class PomoTimer : Control
         {
             case Phase.Work:
             {
-                OptionsTimerDurationLineEdit.Text = workMinutes.ToString();
+                OptionsTimerDurationLineEdit.Text = userPreferences.WorkMinutes.ToString();
                 break;
             }
             case Phase.ShortBreak:
             {
-                OptionsTimerDurationLineEdit.Text = shortBreakMinutes.ToString();
+                OptionsTimerDurationLineEdit.Text = userPreferences.ShortBreakMinutes.ToString();
                 break;
             }
             case Phase.LongBreak:
             {
-                OptionsTimerDurationLineEdit.Text = longBreakMinutes.ToString();
+                OptionsTimerDurationLineEdit.Text = userPreferences.LongBreakMinutes.ToString();
                 break;
             }
             default:
                 break;
         }
+
+        SaveUserPreferencesToFile();
         
         // If in a fresh session, reset to apply the new values.
         if (freshSessionAndShouldPlaySfxOnPlay)
@@ -518,11 +517,13 @@ public class PomoTimer : Control
         {
             newFrequencyAsInteger = Mathf.Clamp(newFrequencyAsInteger, AbsoluteMinimumWorkPhasesPerLongBreak, AbsoluteMaximumWorkPhasesPerLongBreak);
 
-            workPhasesPerLongBreak = newFrequencyAsInteger;
+            userPreferences.LongBreakFrequency = newFrequencyAsInteger;
         }
 
         // Apply the value to the text, regardless of whether it was successful.
-        OptionsLongBreakFrequencyLineEdit.Text = workPhasesPerLongBreak.ToString();
+        OptionsLongBreakFrequencyLineEdit.Text = userPreferences.LongBreakFrequency.ToString();
+
+        SaveUserPreferencesToFile();
         
         // If in a fresh session, reset to apply the new values.
         if (freshSessionAndShouldPlaySfxOnPlay)

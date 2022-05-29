@@ -543,9 +543,7 @@ WorkPhaseStartSfx = ExtResource( 11 )
 ShortBreakPhaseStartSfx = ExtResource( 10 )
 LongBreakPhaseStartSfx = ExtResource( 9 )
 MinSfxVolumeDb = -50.0
-DefaultSfxVolume = 80.0
-upperTimerColor = Color( 1, 0.462745, 0.462745, 1 )
-lowerTimerColor = Color( 0.552941, 0.819608, 1, 1 )
+UserPreferencesFileName = "UserPreferences.yaml"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -10.0
