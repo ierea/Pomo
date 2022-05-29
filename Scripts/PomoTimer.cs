@@ -596,6 +596,11 @@ public class PomoTimer : Control
         SubmitTimerDuration(OptionsWorkTimerDurationLineEdit, newText, Phase.Work);
     }
 
+    private void OnWorkTimerDurationLineEditFocusEntered()
+    {
+        OptionsWorkTimerDurationLineEdit.CaretPosition = OptionsWorkTimerDurationLineEdit.Text.Length;
+    }
+
     private void OnWorkTimerDurationLineEditFocusExited()
     {
         SubmitTimerDuration(OptionsWorkTimerDurationLineEdit, OptionsWorkTimerDurationLineEdit.Text, Phase.Work);
@@ -611,6 +616,11 @@ public class PomoTimer : Control
         SubmitTimerDuration(OptionsShortBreakTimerDurationLineEdit, newText, Phase.ShortBreak);
     }
 
+    private void OnShortBreakTimerDurationLineEditFocusEntered()
+    {
+        OptionsShortBreakTimerDurationLineEdit.CaretPosition = OptionsShortBreakTimerDurationLineEdit.Text.Length;
+    }
+
     private void OnShortBreakTimerDurationLineEditFocusExited()
     {
         SubmitTimerDuration(OptionsShortBreakTimerDurationLineEdit, OptionsShortBreakTimerDurationLineEdit.Text, Phase.ShortBreak);
@@ -624,6 +634,11 @@ public class PomoTimer : Control
     private void OnLongBreakTimerDurationLineEditTextEntered(string newText)
     {
         SubmitTimerDuration(OptionsLongBreakTimerDurationLineEdit, newText, Phase.LongBreak);
+    }
+
+    private void OnLongBreakTimerDurationLineEditFocusEntered()
+    {
+        OptionsLongBreakTimerDurationLineEdit.CaretPosition = OptionsLongBreakTimerDurationLineEdit.Text.Length;
     }
 
     private void OnLongBreakTimerDurationLineEditFocusExited()
@@ -717,6 +732,11 @@ public class PomoTimer : Control
     private void OnLongBreakFrequencyLineEditTextEntered(string newText)
     {
         SubmitLongBreakFrequency(newText);
+    }
+
+    private void OnLongBreakFrequencyLineEditFocusEntered()
+    {
+        OptionsLongBreakFrequencyLineEdit.CaretPosition = OptionsLongBreakFrequencyLineEdit.Text.Length;
     }
 
     private void OnLongBreakFrequencyLineEditFocusExited()
