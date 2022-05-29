@@ -118,9 +118,16 @@ public class PomoTimer : Control
         OptionsTimerLowerColorPickerTextureRect = GetNode<TextureRect>(OptionsLowerTimerColorPickerTextureRectNodePath);
 
         OptionsWorkTimerDurationLineEdit = GetNode<LineEdit>(OptionsWorkTimerDurationLineEditNodePath);
+        OptionsWorkTimerDurationLineEdit.Text = userPreferences.WorkMinutes.ToString();
+
         OptionsShortBreakTimerDurationLineEdit = GetNode<LineEdit>(OptionsShortBreakTimerDurationLineEditNodePath);
+        OptionsShortBreakTimerDurationLineEdit.Text = userPreferences.ShortBreakMinutes.ToString();
+
         OptionsLongBreakTimerDurationLineEdit = GetNode<LineEdit>(OptionsLongBreakTimerDurationLineEditNodePath);
+        OptionsLongBreakTimerDurationLineEdit.Text = userPreferences.LongBreakMinutes.ToString();
+
         OptionsLongBreakFrequencyLineEdit = GetNode<LineEdit>(OptionsLongBreakFrequencyLineEditNodePath);
+        OptionsLongBreakFrequencyLineEdit.Text = userPreferences.LongBreakFrequency.ToString();
 
         UpdateTimerText();
         UpdateTimerRectSizes();
