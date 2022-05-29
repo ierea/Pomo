@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://Fonts/MainTimerFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/AnimatedTimerButton.cs" type="Script" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://Styles/ColorPickerTheme.tres" type="Theme" id=26]
 [ext_resource path="res://Styles/VolumeSliderTheme.tres" type="Theme" id=27]
 [ext_resource path="res://Fonts/OptionsMenuSmallerParameterFont.tres" type="DynamicFont" id=28]
+[ext_resource path="res://Styles/OptionsValueLineEditFocusedStyle.tres" type="StyleBox" id=29]
 
 [sub_resource type="Animation" id=5]
 resource_name = "Hovered"
@@ -1695,7 +1696,7 @@ custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
 custom_colors/font_color = Color( 0.14902, 0.14902, 0.14902, 1 )
 custom_fonts/font = ExtResource( 22 )
 custom_styles/read_only = ExtResource( 23 )
-custom_styles/focus = ExtResource( 23 )
+custom_styles/focus = ExtResource( 29 )
 custom_styles/normal = ExtResource( 23 )
 text = "25"
 align = 1
@@ -1791,7 +1792,7 @@ custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
 custom_colors/font_color = Color( 0.14902, 0.14902, 0.14902, 1 )
 custom_fonts/font = ExtResource( 22 )
 custom_styles/read_only = ExtResource( 23 )
-custom_styles/focus = ExtResource( 23 )
+custom_styles/focus = ExtResource( 29 )
 custom_styles/normal = ExtResource( 23 )
 text = "5"
 align = 1
@@ -1887,7 +1888,7 @@ custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
 custom_colors/font_color = Color( 0.14902, 0.14902, 0.14902, 1 )
 custom_fonts/font = ExtResource( 22 )
 custom_styles/read_only = ExtResource( 23 )
-custom_styles/focus = ExtResource( 23 )
+custom_styles/focus = ExtResource( 29 )
 custom_styles/normal = ExtResource( 23 )
 text = "30"
 align = 1
@@ -1983,7 +1984,7 @@ custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
 custom_colors/font_color = Color( 0.14902, 0.14902, 0.14902, 1 )
 custom_fonts/font = ExtResource( 22 )
 custom_styles/read_only = ExtResource( 23 )
-custom_styles/focus = ExtResource( 23 )
+custom_styles/focus = ExtResource( 29 )
 custom_styles/normal = ExtResource( 23 )
 text = "5"
 align = 1
