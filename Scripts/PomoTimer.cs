@@ -138,7 +138,7 @@ public class PomoTimer : Control
         LowerTimerTextureRect = GetNode<TextureRect>(LowerTimerTextureRectNodePath);
 
         PinWindowButton = GetNode<Button>(PinWindowButtonNodePath);
-        if (OS.GetName() == "HTML5")
+        if (!PlatformAllowsWindowPinning())
         {
             PinWindowButton.Visible = false;
             PinWindowButton.Disabled = true;
@@ -215,7 +215,8 @@ public class PomoTimer : Control
 
         if (!OptionsPopup.Visible)
         {
-            if (Input.IsActionJustPressed(PauseTimerActionName) || Input.IsActionJustPressed(PlayTimerActionName))
+            if (Input.IsActionJustPressed(PauseTimerActionName) ||
+                Input.IsActionJustPressed(PlayTimerActionName))
             {
                 TogglePauseTimer();
             }
@@ -230,9 +231,13 @@ public class PomoTimer : Control
                 ShowOptionsPopup();
             }
 
-            if (Input.IsActionJustPressed(PinWindowActionName) || Input.IsActionJustPressed(UnpinWindowActionName))
+            if (Input.IsActionJustPressed(PinWindowActionName) ||
+                Input.IsActionJustPressed(UnpinWindowActionName))
             {
-                TogglePinWindow();
+                if (PlatformAllowsWindowPinning())
+                {
+                    TogglePinWindow();
+                }
             }
         }
         else
@@ -805,6 +810,20 @@ public class PomoTimer : Control
         {
             PinWindowButtonTextureRect.Texture = UnpinWindowTexture;
             OS.SetWindowAlwaysOnTop(true);
+        }
+    }
+
+    private bool PlatformAllowsWindowPinning()
+    {
+        if (OS.GetName() == "Windows" ||
+            OS.GetName() == "OSX" ||
+            OS.GetName() == "X11")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }
