@@ -543,7 +543,6 @@ UnpinWindowTexture = ExtResource( 13 )
 WorkPhaseStartSfx = ExtResource( 11 )
 ShortBreakPhaseStartSfx = ExtResource( 10 )
 LongBreakPhaseStartSfx = ExtResource( 9 )
-MinSfxVolumeDb = -50.0
 UserPreferencesFileName = "UserPreferences.yaml"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

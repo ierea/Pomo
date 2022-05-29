@@ -5,7 +5,7 @@ using YamlDotNet.Serialization;
 public class UserPreferences
 {
     public int UserPreferencesVersion = 1;
-    public float SfxVolume = 80.0f;
+    public float SfxVolume = 50.0f;
     public Color UpperTimerColor = new Color("#ff7676");
     public Color LowerTimerColor = new Color("#8dd1ff");
     public int WorkMinutes = 25;
