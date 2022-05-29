@@ -44,9 +44,6 @@ public class PomoTimer : Control
     [Export] private AudioStream ShortBreakPhaseStartSfx;
     [Export] private AudioStream LongBreakPhaseStartSfx;
 
-    [Export] private float MinSfxVolumeDb;
-    [Export] private float MaxSfxVolumeDb;
-
     [Export] private string UserPreferencesFileName;
 
     private const int SpeedMultiplier = 1;
@@ -376,7 +373,7 @@ public class PomoTimer : Control
     private void SetSfxVolume(float newVolume)
     {
         userPreferences.SfxVolume = newVolume;
-        AudioStreamPlayer.VolumeDb = Mathf.Lerp(MinSfxVolumeDb, MaxSfxVolumeDb, userPreferences.SfxVolume / 100.0f);
+        AudioStreamPlayer.VolumeDb = GD.Linear2Db(userPreferences.SfxVolume / 100.0f);
         SaveUserPreferencesToFile();
     }
 
