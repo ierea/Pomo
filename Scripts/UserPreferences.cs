@@ -4,7 +4,7 @@ using YamlDotNet.Serialization;
 
 public class UserPreferences
 {
-    public int UserPreferencesVersion = 1;
+    public int UserPreferencesVersion = 2;
     public float SfxVolume = 50.0f;
     public Color UpperTimerColor = new Color("#ff7676");
     public Color LowerTimerColor = new Color("#8dd1ff");
@@ -12,6 +12,13 @@ public class UserPreferences
     public int ShortBreakMinutes = 5;
     public int LongBreakMinutes = 30;
     public int LongBreakFrequency = 5;
+
+    public Vector2 WindowSize;
+
+    public UserPreferences()
+    {
+        WindowSize = OS.WindowSize;
+    }
 
     public static UserPreferences CreateFromFile(string fileName)
     {

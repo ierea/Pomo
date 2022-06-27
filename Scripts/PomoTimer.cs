@@ -127,6 +127,9 @@ public class PomoTimer : Control
     {
         defaultUserPreferences = new UserPreferences();
         userPreferences = UserPreferences.CreateFromFile(UserPreferencesFileName);
+
+        OS.WindowSize = userPreferences.WindowSize;
+
         ResetTimerValues();
 
         TimeLabel = GetNode<Label>(TimeLabelNodePath);
@@ -824,6 +827,15 @@ public class PomoTimer : Control
         else
         {
             return false;
+        }
+    }
+
+    private void OnViewportSizeChanged()
+    {
+        if (userPreferences != null)
+        {
+            userPreferences.WindowSize = OS.WindowSize;
+            SaveUserPreferencesToFile();
         }
     }
 }
