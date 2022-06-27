@@ -1,8 +1,14 @@
 using Godot;
 using System;
 
+/// <summary>
+/// The main timer app logic handler.
+/// </summary>
 public class PomoTimer : Control
 {
+    /// <summary>
+    /// Timer phase, following the Pomodoro technique.
+    /// </summary>
     enum Phase
     {
         Work,
@@ -10,6 +16,7 @@ public class PomoTimer : Control
         LongBreak
     }
 
+    #region Node Paths
     [Export] private NodePath AudioStreamPlayerNodePath;
     [Export] private NodePath TimeLabelNodePath;
     [Export] private NodePath PauseButtonNodePath;
@@ -45,7 +52,9 @@ public class PomoTimer : Control
 
     [Export] private NodePath OptionsResetLongBreakFrequencyButtonNodePath;
     [Export] private NodePath OptionsLongBreakFrequencyLineEditNodePath;
+    #endregion
 
+    #region Resources
     [Export] private Texture PauseTexture;
     [Export] private Texture PlayTexture;
     [Export] private Texture PinWindowTexture;
@@ -54,9 +63,13 @@ public class PomoTimer : Control
     [Export] private AudioStream WorkPhaseStartSfx;
     [Export] private AudioStream ShortBreakPhaseStartSfx;
     [Export] private AudioStream LongBreakPhaseStartSfx;
+    #endregion
 
+    #region File Names
     [Export] private string UserPreferencesFileName;
+    #endregion
 
+    #region Input Action Names
     [Export] private string PauseTimerActionName;
     [Export] private string PlayTimerActionName;
     [Export] private string ResetTimerActionName;
@@ -64,7 +77,9 @@ public class PomoTimer : Control
     [Export] private string CloseOptionsActionName;
     [Export] private string PinWindowActionName;
     [Export] private string UnpinWindowActionName;
+    #endregion
 
+    #region Constants
     private const int SpeedMultiplier = 1;
     private const int MillisecondsInASecond = 1000;
     private const int SecondsInAMinute = 60;
@@ -74,7 +89,9 @@ public class PomoTimer : Control
 
     private const int AbsoluteMinimumWorkPhasesPerLongBreak = 1;
     private const int AbsoluteMaximumWorkPhasesPerLongBreak = 9999;
+    #endregion
 
+    #region Nodes
     private AudioStreamPlayer AudioStreamPlayer;
     private Label TimeLabel;
     private Button PauseButton;
@@ -89,7 +106,7 @@ public class PomoTimer : Control
 
     private Button OptionsResetSfxVolumeButton;
     private HSlider OptionsSfxVolumeSlider;
-    
+
     private Button OptionsResetTimerUpperColorButton;
     private ColorPickerButton OptionsTimerUpperColorPickerButton;
     private TextureRect OptionsTimerUpperColorPickerTextureRect;
@@ -112,7 +129,9 @@ public class PomoTimer : Control
 
     private UserPreferences userPreferences;
     private UserPreferences defaultUserPreferences;
+    #endregion
 
+    #region App State
     private Phase currentPhase;
     private int currentMinutesRemaining;
     private int currentSecondsRemaining;
@@ -121,8 +140,11 @@ public class PomoTimer : Control
     private bool timerActive;
     private bool freshSessionAndShouldPlaySfxOnPlay;
     private int workPhasesSinceLongBreak;
+    #endregion
 
-    // Called when the node enters the scene tree for the first time.
+    /// <summary>
+    /// Called when the node enters the scene tree for the first time.
+    /// </summary>
     public override void _Ready()
     {
         defaultUserPreferences = new UserPreferences();
@@ -187,7 +209,10 @@ public class PomoTimer : Control
         UpdateColorPickerTextureRects();
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    /// <summary>
+    /// Called every frame. 'delta' is the elapsed time since the previous frame.
+    /// </summary>
+    /// <param name="delta">Time in seconds since the previous frame.</param>
     public override void _Process(float delta)
     {
         if (timerActive)
@@ -205,7 +230,7 @@ public class PomoTimer : Control
                 currentMinutesRemaining -= 1;
                 currentSecondsRemaining += SecondsInAMinute;
             }
-            
+
             if (currentMinutesRemaining < 0)
             {
                 currentMinutesRemaining = 0;
@@ -223,7 +248,7 @@ public class PomoTimer : Control
             {
                 TogglePauseTimer();
             }
-            
+
             if (Input.IsActionJustPressed(ResetTimerActionName))
             {
                 ResetTimer();
@@ -252,11 +277,17 @@ public class PomoTimer : Control
         }
     }
 
+    /// <summary>
+    /// Update the main timer's text to display the current remaining time.
+    /// </summary>
     private void UpdateTimerText()
     {
         TimeLabel.Text = currentMinutesRemaining + ":" + currentSecondsRemaining.ToString("0#");
     }
 
+    /// <summary>
+    /// Update the relative sizes of the timer's upper and lower rects according to the current remaining time.
+    /// </summary>
     private void UpdateTimerRectSizes()
     {
         float millisecondsRemaining = currentMinutesRemaining * SecondsInAMinute * MillisecondsInASecond + currentSecondsRemaining * MillisecondsInASecond + currentMillisecondsRemaining;
@@ -264,38 +295,44 @@ public class PomoTimer : Control
         switch (currentPhase)
         {
             case Phase.Work:
-            {
-                int totalWorkMilliseconds = currentPhaseTotalMinutes * SecondsInAMinute * MillisecondsInASecond;
+                {
+                    int totalWorkMilliseconds = currentPhaseTotalMinutes * SecondsInAMinute * MillisecondsInASecond;
 
-                UpperTimerTextureRect.SizeFlagsStretchRatio = 1.0f - millisecondsRemaining / totalWorkMilliseconds;
-                LowerTimerTextureRect.SizeFlagsStretchRatio = millisecondsRemaining / totalWorkMilliseconds;
-                break;
-            }
+                    UpperTimerTextureRect.SizeFlagsStretchRatio = 1.0f - millisecondsRemaining / totalWorkMilliseconds;
+                    LowerTimerTextureRect.SizeFlagsStretchRatio = millisecondsRemaining / totalWorkMilliseconds;
+                    break;
+                }
             case Phase.ShortBreak:
-            {
-                int totalShortBreakMilliseconds = currentPhaseTotalMinutes * SecondsInAMinute * MillisecondsInASecond;
+                {
+                    int totalShortBreakMilliseconds = currentPhaseTotalMinutes * SecondsInAMinute * MillisecondsInASecond;
 
-                UpperTimerTextureRect.SizeFlagsStretchRatio = millisecondsRemaining / totalShortBreakMilliseconds;
-                LowerTimerTextureRect.SizeFlagsStretchRatio = 1.0f - millisecondsRemaining / totalShortBreakMilliseconds;
-                break;
-            }
+                    UpperTimerTextureRect.SizeFlagsStretchRatio = millisecondsRemaining / totalShortBreakMilliseconds;
+                    LowerTimerTextureRect.SizeFlagsStretchRatio = 1.0f - millisecondsRemaining / totalShortBreakMilliseconds;
+                    break;
+                }
             case Phase.LongBreak:
-            {
-                int totalLongBreakMilliseconds = currentPhaseTotalMinutes * SecondsInAMinute * MillisecondsInASecond;
+                {
+                    int totalLongBreakMilliseconds = currentPhaseTotalMinutes * SecondsInAMinute * MillisecondsInASecond;
 
-                UpperTimerTextureRect.SizeFlagsStretchRatio = millisecondsRemaining / totalLongBreakMilliseconds;
-                LowerTimerTextureRect.SizeFlagsStretchRatio = 1.0f - millisecondsRemaining / totalLongBreakMilliseconds;
-                break;
-            }
+                    UpperTimerTextureRect.SizeFlagsStretchRatio = millisecondsRemaining / totalLongBreakMilliseconds;
+                    LowerTimerTextureRect.SizeFlagsStretchRatio = 1.0f - millisecondsRemaining / totalLongBreakMilliseconds;
+                    break;
+                }
         }
     }
 
+    /// <summary>
+    /// Update the colors of the timer's rects according to the colors stored in user preferences.
+    /// </summary>
     private void UpdateTimerRectColors()
     {
         UpperTimerTextureRect.Modulate = userPreferences.UpperTimerColor;
         LowerTimerTextureRect.Modulate = userPreferences.LowerTimerColor;
     }
 
+    /// <summary>
+    /// Update the colors displayed over the color picker buttons according to the currently stored user preferences.
+    /// </summary>
     private void UpdateColorPickerTextureRects()
     {
         OptionsTimerUpperColorPickerButton.Color = userPreferences.UpperTimerColor;
@@ -305,65 +342,72 @@ public class PomoTimer : Control
         OptionsTimerLowerColorPickerTextureRect.Modulate = userPreferences.LowerTimerColor;
     }
 
+    /// <summary>
+    /// End the current timer phase and enter the next one.
+    /// </summary>
     private void GoToNextTimerPhase()
     {
         switch (currentPhase)
         {
             case Phase.Work:
-            {
-                workPhasesSinceLongBreak += 1;
-                if (workPhasesSinceLongBreak >= userPreferences.LongBreakFrequency)
                 {
-                    InitializeNewTimerPhase(Phase.LongBreak);
+                    workPhasesSinceLongBreak += 1;
+                    if (workPhasesSinceLongBreak >= userPreferences.LongBreakFrequency)
+                    {
+                        InitializeNewTimerPhase(Phase.LongBreak);
+                    }
+                    else
+                    {
+                        InitializeNewTimerPhase(Phase.ShortBreak);
+                    }
+                    break;
                 }
-                else
-                {
-                    InitializeNewTimerPhase(Phase.ShortBreak);
-                }
-                break;
-            }
             case Phase.ShortBreak:
-            {
-                InitializeNewTimerPhase(Phase.Work);
-                break;
-            }
+                {
+                    InitializeNewTimerPhase(Phase.Work);
+                    break;
+                }
             case Phase.LongBreak:
-            {
-                InitializeNewTimerPhase(Phase.Work);
-                break;
-            }
+                {
+                    InitializeNewTimerPhase(Phase.Work);
+                    break;
+                }
         }
     }
 
+    /// <summary>
+    /// Initialize the timer based on the input phase.
+    /// </summary>
+    /// <param name="newPhase">The phase to initialize the timer for</param>
     private void InitializeNewTimerPhase(Phase newPhase)
     {
         switch (newPhase)
         {
             case Phase.Work:
-            {
-                currentMinutesRemaining = userPreferences.WorkMinutes;
+                {
+                    currentMinutesRemaining = userPreferences.WorkMinutes;
 
-                AudioStreamPlayer.Stream = WorkPhaseStartSfx;
-                AudioStreamPlayer.Play();
-                break;
-            }
+                    AudioStreamPlayer.Stream = WorkPhaseStartSfx;
+                    AudioStreamPlayer.Play();
+                    break;
+                }
             case Phase.ShortBreak:
-            {
-                currentMinutesRemaining = userPreferences.ShortBreakMinutes;
+                {
+                    currentMinutesRemaining = userPreferences.ShortBreakMinutes;
 
-                AudioStreamPlayer.Stream = ShortBreakPhaseStartSfx;
-                AudioStreamPlayer.Play();
-                break;
-            }
+                    AudioStreamPlayer.Stream = ShortBreakPhaseStartSfx;
+                    AudioStreamPlayer.Play();
+                    break;
+                }
             case Phase.LongBreak:
-            {
-                currentMinutesRemaining = userPreferences.LongBreakMinutes;
-                workPhasesSinceLongBreak = 0;
+                {
+                    currentMinutesRemaining = userPreferences.LongBreakMinutes;
+                    workPhasesSinceLongBreak = 0;
 
-                AudioStreamPlayer.Stream = LongBreakPhaseStartSfx;
-                AudioStreamPlayer.Play();
-                break;
-            }
+                    AudioStreamPlayer.Stream = LongBreakPhaseStartSfx;
+                    AudioStreamPlayer.Play();
+                    break;
+                }
         }
         currentPhaseTotalMinutes = currentMinutesRemaining;
         currentSecondsRemaining = 0;
@@ -371,6 +415,9 @@ public class PomoTimer : Control
         currentPhase = newPhase;
     }
 
+    /// <summary>
+    /// Reset the timer values, display the play button texture, and update the timer's text and relative rect sizes.
+    /// </summary>
     private void ResetTimer()
     {
         ResetTimerValues();
@@ -381,6 +428,9 @@ public class PomoTimer : Control
         UpdateTimerRectSizes();
     }
 
+    /// <summary>
+    /// Reset the active timer's values to the initial state.
+    /// </summary>
     private void ResetTimerValues()
     {
         timerActive = false;
@@ -393,11 +443,19 @@ public class PomoTimer : Control
         workPhasesSinceLongBreak = 0;
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the pause button.<br/>
+    /// Toggle pause for the timer.
+    /// </summary>
     private void OnPauseButtonPressed()
     {
         TogglePauseTimer();
     }
 
+    /// <summary>
+    /// Toggle the timer's pause state.
+    /// </summary>
     void TogglePauseTimer()
     {
         if (freshSessionAndShouldPlaySfxOnPlay)
@@ -407,7 +465,7 @@ public class PomoTimer : Control
 
             freshSessionAndShouldPlaySfxOnPlay = false;
         }
-        
+
         if (timerActive)
         {
             PauseButtonTextureRect.Texture = PlayTexture;
@@ -420,12 +478,19 @@ public class PomoTimer : Control
         }
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the reset button.<br/>
+    /// Reset the timer.
+    /// </summary>
     private void OnResetButtonPressed()
     {
         ResetTimer();
     }
 
-    // Hide reset buttons if values are default
+    /// <summary>
+    /// Validate the visibility of all options reset buttons, hiding them if their associated preferences are at their default values, and displaying them otherwise.
+    /// </summary>
     private void ValidateResetButtons()
     {
         if (Mathf.Abs(userPreferences.SfxVolume - defaultUserPreferences.SfxVolume) < Mathf.Epsilon)
@@ -506,42 +571,76 @@ public class PomoTimer : Control
         }
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the options button when it is pressed.<br/>
+    /// Show the options popup.
+    /// </summary>
     private void OnOptionsButtonPressed()
     {
         ShowOptionsPopup();
     }
 
+    /// <summary>
+    /// Show the options popup.
+    /// </summary>
     private void ShowOptionsPopup()
     {
         ValidateResetButtons();
         OptionsPopup.ShowOptionsPopup();
     }
 
+    /// <summary>
+    /// Close the options popup.
+    /// </summary>
     private void CloseOptionsPopup()
     {
         OptionsPopup.HideOptionsPopup();
     }
 
+    /// <summary>
+    /// Save the user preferences to file.
+    /// </summary>
     private void SaveUserPreferencesToFile()
     {
         userPreferences.SaveToFile(UserPreferencesFileName);
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the options menu background overlay button when it is pressed.<br/>
+    /// Close the options popup.
+    /// </summary>
     private void OnOptionsPopupOverlayButtonPressed()
     {
         CloseOptionsPopup();
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with options menu confirm button when it is pressed.<br/>
+    /// Close the options popup.
+    /// </summary>
     private void OnConfirmOptionsButtonPressed()
     {
         CloseOptionsPopup();
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the SFX Volume Slider when its value changes.<br/>
+    /// Set the SFX volume.
+    /// </summary>
+    /// <param name="newVolume">The new SFX volume</param>
     private void OnSfxVolumeSliderValueChanged(float newVolume)
     {
         SetSfxVolume(newVolume);
     }
 
+    /// <summary>
+    /// Set the SFX volume.
+    /// </summary>
+    /// <param name="newVolume">The new SFX volume</param>
     private void SetSfxVolume(float newVolume)
     {
         userPreferences.SfxVolume = newVolume;
@@ -550,6 +649,11 @@ public class PomoTimer : Control
         ValidateResetButtons();
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the reset volume button when it is pressed.<br/>
+    /// Reset the SFX volume.
+    /// </summary>
     private void OnResetVolumeButtonPressed()
     {
         float defaultSfxVolume = defaultUserPreferences.SfxVolume;
@@ -559,6 +663,11 @@ public class PomoTimer : Control
         ValidateResetButtons();
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the upper timer color picker button when its color has been changed.<br/>
+    /// Set the upper timer rect color then validate reset buttons.
+    /// </summary>
     private void OnUpperTimerColorPickerButtonColorChanged(Color newColor)
     {
         SetUpperTimerColor(newColor);
@@ -566,6 +675,10 @@ public class PomoTimer : Control
         ValidateResetButtons();
     }
 
+    /// <summary>
+    /// Set the color of the upper timer rect, update, and save preference to file.
+    /// </summary>
+    /// <param name="newColor">The color to apply to the upper timer rect</param>
     private void SetUpperTimerColor(Color newColor)
     {
         userPreferences.UpperTimerColor = newColor;
@@ -575,16 +688,30 @@ public class PomoTimer : Control
         ValidateResetButtons();
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the reset upper timer color button when it is pressed.<br/>
+    /// Reset the upper timer color.
+    /// </summary>
     private void OnResetUpperColorButtonPressed()
     {
         SetUpperTimerColor(defaultUserPreferences.UpperTimerColor);
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the lower timer color picker button when its color has been changed.<br/>
+    /// Set the upper timer rect color then validate reset buttons.
+    /// </summary>
     private void OnLowerTimerColorPickerButtonColorChanged(Color newColor)
     {
         SetLowerTimerColor(newColor);
     }
 
+    /// <summary>
+    /// Set the color of the lower timer rect, update, and save preference to file.
+    /// </summary>
+    /// <param name="newColor">The color to apply to the lower timer rect</param>
     private void SetLowerTimerColor(Color newColor)
     {
         userPreferences.LowerTimerColor = newColor;
@@ -594,71 +721,145 @@ public class PomoTimer : Control
         ValidateResetButtons();
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the reset lower timer color button when it is pressed.<br/>
+    /// Reset the lower timer color.
+    /// </summary>
     private void OnResetLowerColorButtonPressed()
     {
         SetLowerTimerColor(defaultUserPreferences.LowerTimerColor);
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the work timer duration LineEdit when text is entered.<br/>
+    /// Validates and sets the work timer duration.
+    /// </summary>
+    /// <param name="newText">The input text</param>
     private void OnWorkTimerDurationLineEditTextEntered(string newText)
     {
         SubmitTimerDuration(OptionsWorkTimerDurationLineEdit, newText, Phase.Work);
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the work timer duration LineEdit when it is focused.<br/>
+    /// Moves the caret position to the end of the text.
+    /// </summary>
     private void OnWorkTimerDurationLineEditFocusEntered()
     {
         OptionsWorkTimerDurationLineEdit.CaretPosition = OptionsWorkTimerDurationLineEdit.Text.Length;
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the work timer duration LineEdit when focus is lost.<br/>
+    /// Validates and sets the work timer duration.
+    /// </summary>
     private void OnWorkTimerDurationLineEditFocusExited()
     {
         SubmitTimerDuration(OptionsWorkTimerDurationLineEdit, OptionsWorkTimerDurationLineEdit.Text, Phase.Work);
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the reset work timer duration button when it is pressed.<br/>
+    /// Resets the work timer duration to default values.
+    /// </summary>
     private void OnResetWorkTimerDurationButtonPressed()
     {
         SubmitTimerDuration(OptionsWorkTimerDurationLineEdit, defaultUserPreferences.WorkMinutes.ToString(), Phase.Work);
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the short break timer duration LineEdit when text is entered.<br/>
+    /// Validates and sets the short break timer duration.
+    /// </summary>
+    /// <param name="newText">The input text</param>
     private void OnShortBreakTimerDurationLineEditTextEntered(string newText)
     {
         SubmitTimerDuration(OptionsShortBreakTimerDurationLineEdit, newText, Phase.ShortBreak);
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the short break timer duration LineEdit when it is focused.<br/>
+    /// Validates and sets the short break timer duration.
+    /// </summary>
     private void OnShortBreakTimerDurationLineEditFocusEntered()
     {
         OptionsShortBreakTimerDurationLineEdit.CaretPosition = OptionsShortBreakTimerDurationLineEdit.Text.Length;
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the short break timer duration LineEdit when focus is lost.<br/>
+    /// Validates and sets the short break timer duration.
+    /// </summary>
     private void OnShortBreakTimerDurationLineEditFocusExited()
     {
         SubmitTimerDuration(OptionsShortBreakTimerDurationLineEdit, OptionsShortBreakTimerDurationLineEdit.Text, Phase.ShortBreak);
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the reset short break timer duration button when it is pressed.<br/>
+    /// Resets the short break timer duration to default values.
+    /// </summary>
     private void OnResetShortBreakTimerDurationButtonPressed()
     {
         SubmitTimerDuration(OptionsShortBreakTimerDurationLineEdit, defaultUserPreferences.ShortBreakMinutes.ToString(), Phase.ShortBreak);
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the long break timer duration LineEdit when text is entered.<br/>
+    /// Validates and sets the long break timer duration.
+    /// </summary>
+    /// <param name="newText">The input text</param>
     private void OnLongBreakTimerDurationLineEditTextEntered(string newText)
     {
         SubmitTimerDuration(OptionsLongBreakTimerDurationLineEdit, newText, Phase.LongBreak);
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the long break timer duration LineEdit when it is focused.<br/>
+    /// Validates and sets the long break timer duration.
+    /// </summary>
     private void OnLongBreakTimerDurationLineEditFocusEntered()
     {
         OptionsLongBreakTimerDurationLineEdit.CaretPosition = OptionsLongBreakTimerDurationLineEdit.Text.Length;
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the long break timer duration LineEdit when focus is lost.<br/>
+    /// Validates and sets the long break timer duration.
+    /// </summary>
     private void OnLongBreakTimerDurationLineEditFocusExited()
     {
         SubmitTimerDuration(OptionsLongBreakTimerDurationLineEdit, OptionsLongBreakTimerDurationLineEdit.Text, Phase.LongBreak);
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the reset long break timer duration button when it is pressed.<br/>
+    /// Resets the long break timer duration to default values.
+    /// </summary>
     private void OnResetLongBreakTimerDurationButtonPressed()
     {
         SubmitTimerDuration(OptionsLongBreakTimerDurationLineEdit, defaultUserPreferences.LongBreakMinutes.ToString(), Phase.LongBreak);
     }
 
+    /// <summary>
+    /// Validate the submitted text, and set it as the timer duration for the specified phase if it is valid.
+    /// </summary>
+    /// <param name="OptionsTimerDurationLineEdit">The LineEdit for the submitted timer duration</param>
+    /// <param name="newText">The text input for the timer duration</param>
+    /// <param name="phaseType">The timer phase to apply the timer duration to</param>
     private void SubmitTimerDuration(LineEdit OptionsTimerDurationLineEdit, string newText, Phase phaseType)
     {
         int newMinutesAsInteger;
@@ -683,20 +884,20 @@ public class PomoTimer : Control
             switch (phaseType)
             {
                 case Phase.Work:
-                {
-                    userPreferences.WorkMinutes = newMinutesAsInteger;
-                    break;
-                }
+                    {
+                        userPreferences.WorkMinutes = newMinutesAsInteger;
+                        break;
+                    }
                 case Phase.ShortBreak:
-                {
-                    userPreferences.ShortBreakMinutes = newMinutesAsInteger;
-                    break;
-                }
+                    {
+                        userPreferences.ShortBreakMinutes = newMinutesAsInteger;
+                        break;
+                    }
                 case Phase.LongBreak:
-                {
-                    userPreferences.LongBreakMinutes = newMinutesAsInteger;
-                    break;
-                }
+                    {
+                        userPreferences.LongBreakMinutes = newMinutesAsInteger;
+                        break;
+                    }
                 default:
                     break;
             }
@@ -706,20 +907,20 @@ public class PomoTimer : Control
         switch (phaseType)
         {
             case Phase.Work:
-            {
-                OptionsTimerDurationLineEdit.Text = userPreferences.WorkMinutes.ToString();
-                break;
-            }
+                {
+                    OptionsTimerDurationLineEdit.Text = userPreferences.WorkMinutes.ToString();
+                    break;
+                }
             case Phase.ShortBreak:
-            {
-                OptionsTimerDurationLineEdit.Text = userPreferences.ShortBreakMinutes.ToString();
-                break;
-            }
+                {
+                    OptionsTimerDurationLineEdit.Text = userPreferences.ShortBreakMinutes.ToString();
+                    break;
+                }
             case Phase.LongBreak:
-            {
-                OptionsTimerDurationLineEdit.Text = userPreferences.LongBreakMinutes.ToString();
-                break;
-            }
+                {
+                    OptionsTimerDurationLineEdit.Text = userPreferences.LongBreakMinutes.ToString();
+                    break;
+                }
             default:
                 break;
         }
@@ -727,36 +928,61 @@ public class PomoTimer : Control
         SaveUserPreferencesToFile();
 
         ValidateResetButtons();
-        
+
         // If in a fresh session, reset to apply the new values.
         if (freshSessionAndShouldPlaySfxOnPlay)
         {
             ResetTimer();
         }
-        
+
         OptionsTimerDurationLineEdit.ReleaseFocus();
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the long break frequency LineEdit when it is focused.<br/>
+    /// Validates and sets the long break frequency.
+    /// </summary>
+    /// <param name="newText">The input text to be parsed</param>
     private void OnLongBreakFrequencyLineEditTextEntered(string newText)
     {
         SubmitLongBreakFrequency(newText);
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the long break frequency LineEdit when it is focused.<br/>
+    /// Validates and sets the long break frequency.
+    /// </summary>
     private void OnLongBreakFrequencyLineEditFocusEntered()
     {
         OptionsLongBreakFrequencyLineEdit.CaretPosition = OptionsLongBreakFrequencyLineEdit.Text.Length;
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the long break frequency LineEdit when focus is lost.<br/>
+    /// Validates and sets the long break frequency.
+    /// </summary>
     private void OnLongBreakFrequencyLineEditFocusExited()
     {
         SubmitLongBreakFrequency(OptionsLongBreakFrequencyLineEdit.Text);
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the reset short break frequency button when it is pressed.<br/>
+    /// Resets the short break frequency to default values.
+    /// </summary>
     private void OnResetLongBreakFrequencyButtonPressed()
     {
         SubmitLongBreakFrequency(defaultUserPreferences.LongBreakFrequency.ToString());
     }
 
+    /// <summary>
+    /// Validate the submitted text, and set it as the long break frequency if it is valid.
+    /// </summary>
+    /// <param name="newText">The text input for the long break frequency</param>
     private void SubmitLongBreakFrequency(string newText)
     {
         int newFrequencyAsInteger;
@@ -787,21 +1013,29 @@ public class PomoTimer : Control
         SaveUserPreferencesToFile();
 
         ValidateResetButtons();
-        
+
         // If in a fresh session, reset to apply the new values.
         if (freshSessionAndShouldPlaySfxOnPlay)
         {
             ResetTimer();
         }
-        
+
         OptionsLongBreakFrequencyLineEdit.ReleaseFocus();
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the pin window button when it is pressed.<br/>
+    /// Toggle the pin status of the app window.
+    /// </summary>
     private void OnPinWindowButtonPressed()
     {
         TogglePinWindow();
     }
 
+    /// <summary>
+    /// Toggle the pin status (whether it is always shown over other windows) of the app window.
+    /// </summary>
     private void TogglePinWindow()
     {
         if (OS.IsWindowAlwaysOnTop())
@@ -816,6 +1050,10 @@ public class PomoTimer : Control
         }
     }
 
+    /// <summary>
+    /// Get whether the current app platform allows for window pinning.
+    /// </summary>
+    /// <returns>True if the app platform allows for window pinning.</returns>
     private bool PlatformAllowsWindowPinning()
     {
         if (OS.GetName() == "Windows" ||
@@ -830,6 +1068,11 @@ public class PomoTimer : Control
         }
     }
 
+    /// <summary>
+    /// Signal Receiver Method.<br/>
+    /// For use with the resize signal of the main timer control.<br/>
+    /// Saves the current window size to user preferences.
+    /// </summary>
     private void OnViewportSizeChanged()
     {
         if (userPreferences != null)
