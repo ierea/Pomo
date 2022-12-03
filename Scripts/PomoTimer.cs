@@ -560,6 +560,16 @@ public class PomoTimer : Control
 			timerActive = true;
 		}
 	}
+	
+	/// <summary>
+	/// Signal Receiver Method.<br/>
+	/// For use with the skip button.<br/>
+	/// Skip to the next phase.
+	/// </summary>
+	private void OnSkipButtonPressed()
+	{
+		GoToNextTimerPhase();
+	}
 
 	/// <summary>
 	/// Signal Receiver Method.<br/>
