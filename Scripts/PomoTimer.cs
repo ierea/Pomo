@@ -20,6 +20,7 @@ public class PomoTimer : Control
 	#region Node Paths
 	[Export] private NodePath AudioStreamPlayerNodePath;
 	[Export] private NodePath TimeLabelNodePath;
+	[Export] private NodePath PhaseLabelNodePath;
 	[Export] private NodePath PauseButtonNodePath;
 	[Export] private NodePath PauseButtonTextureRectNodePath;
 	[Export] private NodePath ResetButtonNodePath;
@@ -100,6 +101,7 @@ public class PomoTimer : Control
 	#region Nodes
 	private AudioStreamPlayer AudioStreamPlayer;
 	private Label TimeLabel;
+	private Label PhaseLabel;
 	private Button PauseButton;
 	private TextureRect PauseButtonTextureRect;
 	private Button ResetButton;
@@ -168,6 +170,7 @@ public class PomoTimer : Control
 		ResetTimerValues();
 
 		TimeLabel = GetNode<Label>(TimeLabelNodePath);
+		PhaseLabel = GetNode<Label>(PhaseLabelNodePath);
 		PauseButton = GetNode<Button>(PauseButtonNodePath);
 		PauseButtonTextureRect = GetNode<TextureRect>(PauseButtonTextureRectNodePath);
 		ResetButton = GetNode<Button>(ResetButtonNodePath);
@@ -222,6 +225,7 @@ public class PomoTimer : Control
 		SetSfxVolume(userPreferences.SfxVolume);
 
 		UpdateTimerText();
+		UpdatePhaseText();
 		UpdateTimerRectSizes();
 		UpdateTimerRectColors();
 		UpdateColorPickerTextureRects();
@@ -256,6 +260,7 @@ public class PomoTimer : Control
 			}
 
 			UpdateTimerText();
+			UpdatePhaseText();
 			UpdateTimerRectSizes();
 		}
 
@@ -303,6 +308,11 @@ public class PomoTimer : Control
 	private void UpdateTimerText()
 	{
 		TimeLabel.Text = currentMinutesRemaining + ":" + currentSecondsRemaining.ToString("0#");
+	}
+
+	private void UpdatePhaseText()
+	{
+		PhaseLabel.Text = (workPhasesSinceLongBreak + 1) + " of " + userPreferences.LongBreakFrequency;
 	}
 
 	/// <summary>
@@ -444,8 +454,7 @@ public class PomoTimer : Control
 		{
 			case Phase.Work:
 				{
-					workPhasesSinceLongBreak += 1;
-					if (workPhasesSinceLongBreak >= userPreferences.LongBreakFrequency)
+					if (workPhasesSinceLongBreak + 1 >= userPreferences.LongBreakFrequency)
 					{
 						InitializeNewTimerPhase(Phase.LongBreak);
 					}
@@ -457,11 +466,13 @@ public class PomoTimer : Control
 				}
 			case Phase.ShortBreak:
 				{
+					workPhasesSinceLongBreak += 1;
 					InitializeNewTimerPhase(Phase.Work);
 					break;
 				}
 			case Phase.LongBreak:
 				{
+					workPhasesSinceLongBreak = 0;
 					InitializeNewTimerPhase(Phase.Work);
 					break;
 				}
@@ -495,7 +506,6 @@ public class PomoTimer : Control
 			case Phase.LongBreak:
 				{
 					currentMinutesRemaining = userPreferences.LongBreakMinutes;
-					workPhasesSinceLongBreak = 0;
 
 					AudioStreamPlayer.Stream = LongBreakPhaseStartSfx;
 					AudioStreamPlayer.Play();
@@ -518,6 +528,7 @@ public class PomoTimer : Control
 		PauseButtonTextureRect.Texture = PlayTexture;
 
 		UpdateTimerText();
+		UpdatePhaseText();
 		UpdateTimerRectSizes();
 	}
 

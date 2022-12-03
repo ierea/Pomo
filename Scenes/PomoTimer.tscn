@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://Fonts/MainTimerFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/AnimatedTimerButton.cs" type="Script" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://Fonts/OptionsMenuSmallerParameterFont.tres" type="DynamicFont" id=28]
 [ext_resource path="res://Styles/OptionsValueLineEditFocusedStyle.tres" type="StyleBox" id=29]
 [ext_resource path="res://Textures/FluentIcons/ic_fluent_fast_forward_24_regular.png" type="Texture" id=30]
+[ext_resource path="res://Fonts/PhaseCountFont.tres" type="DynamicFont" id=31]
 
 [sub_resource type="Animation" id=2]
 resource_name = "Hovered"
@@ -906,6 +907,7 @@ mouse_filter = 1
 script = ExtResource( 4 )
 AudioStreamPlayerNodePath = NodePath("AudioStreamPlayer")
 TimeLabelNodePath = NodePath("TimerControls/VBoxContainer/TimeLabel")
+PhaseLabelNodePath = NodePath("TimerControls/VBoxContainer/PhaseLabel")
 PauseButtonNodePath = NodePath("TimerControls/VBoxContainer/HBoxContainer/PauseButton")
 PauseButtonTextureRectNodePath = NodePath("TimerControls/VBoxContainer/HBoxContainer/PauseButton/MarginContainer/PauseButtonTextureRect")
 ResetButtonNodePath = NodePath("TimerControls/VBoxContainer/HBoxContainer/ResetButton")
@@ -930,7 +932,7 @@ OptionsResetLongBreakTimerDurationButtonNodePath = NodePath("OptionsPopup/Option
 OptionsLongBreakTimerDurationLineEditNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/LongBreakTimerDurationLineEdit")
 OptionsResetLongBreakFrequencyButtonNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/ResetLongBreakFrequencyButton")
 OptionsLongBreakFrequencyLineEditNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/LongBreakFrequencyLineEdit")
-FadeableInterfaceCanvasItemNodePaths = [ NodePath("TimerControls/VBoxContainer/HBoxContainer/PauseButton"), NodePath("TimerControls/VBoxContainer/HBoxContainer/ResetButton"), NodePath("AppControls/VBoxContainer/HBoxContainer/OptionsButton"), NodePath("AppControls/VBoxContainer/HBoxContainer/PinWindowButton"), NodePath("TimerControls/VBoxContainer/HBoxContainer/SkipButton") ]
+FadeableInterfaceCanvasItemNodePaths = [ NodePath("TimerControls/VBoxContainer/HBoxContainer/PauseButton"), NodePath("TimerControls/VBoxContainer/HBoxContainer/ResetButton"), NodePath("AppControls/VBoxContainer/HBoxContainer/OptionsButton"), NodePath("AppControls/VBoxContainer/HBoxContainer/PinWindowButton"), NodePath("TimerControls/VBoxContainer/HBoxContainer/SkipButton"), NodePath("TimerControls/VBoxContainer/PhaseLabel"), NodePath("TimerControls/VBoxContainer/Spacer2") ]
 PauseTexture = ExtResource( 6 )
 PlayTexture = ExtResource( 5 )
 PinWindowTexture = ExtResource( 12 )
@@ -997,30 +999,48 @@ alignment = 1
 
 [node name="Spacer" type="Control" parent="TimerControls/VBoxContainer"]
 margin_right = 480.0
-margin_bottom = 172.0
+margin_bottom = 154.0
 mouse_filter = 1
 size_flags_vertical = 7
 
-[node name="TimeLabel" type="Label" parent="TimerControls/VBoxContainer"]
-margin_top = 172.0
+[node name="PhaseLabel" type="Label" parent="TimerControls/VBoxContainer"]
+margin_top = 154.0
 margin_right = 480.0
-margin_bottom = 261.0
+margin_bottom = 180.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 31 )
+text = "1 of 4"
+align = 1
+valign = 1
+
+[node name="Spacer2" type="Control" parent="TimerControls/VBoxContainer"]
+margin_top = 180.0
+margin_right = 480.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 0, 8 )
+mouse_filter = 1
+
+[node name="TimeLabel" type="Label" parent="TimerControls/VBoxContainer"]
+margin_top = 188.0
+margin_right = 480.0
+margin_bottom = 277.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = ExtResource( 1 )
 text = "25:00"
 align = 1
 valign = 1
 
-[node name="Spacer2" type="Control" parent="TimerControls/VBoxContainer"]
-margin_top = 261.0
-margin_right = 480.0
-margin_bottom = 277.0
-rect_min_size = Vector2( 0, 16 )
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TimerControls/VBoxContainer"]
+[node name="Spacer4" type="Control" parent="TimerControls/VBoxContainer"]
 margin_top = 277.0
 margin_right = 480.0
-margin_bottom = 325.0
+margin_bottom = 293.0
+rect_min_size = Vector2( 0, 16 )
+mouse_filter = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TimerControls/VBoxContainer"]
+margin_top = 293.0
+margin_right = 480.0
+margin_bottom = 341.0
 size_flags_vertical = 5
 size_flags_stretch_ratio = 0.3
 
@@ -1183,7 +1203,7 @@ margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="Spacer3" type="Control" parent="TimerControls/VBoxContainer"]
-margin_top = 325.0
+margin_top = 341.0
 margin_right = 480.0
 margin_bottom = 480.0
 mouse_filter = 1
