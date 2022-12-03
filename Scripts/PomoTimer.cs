@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// The main timer app logic handler.
@@ -52,6 +53,8 @@ public class PomoTimer : Control
 
 	[Export] private NodePath OptionsResetLongBreakFrequencyButtonNodePath;
 	[Export] private NodePath OptionsLongBreakFrequencyLineEditNodePath;
+
+	[Export] private List<NodePath> FadeableInterfaceCanvasItemNodePaths;
 	#endregion
 
 	#region Resources
@@ -89,6 +92,9 @@ public class PomoTimer : Control
 
 	private const int AbsoluteMinimumWorkPhasesPerLongBreak = 1;
 	private const int AbsoluteMaximumWorkPhasesPerLongBreak = 9999;
+
+	private const float SecondsBeforeInterfaceFade = 2.0f;
+	private const float InterfaceFadeDuration = 0.5f;
 	#endregion
 
 	#region Nodes
@@ -127,6 +133,8 @@ public class PomoTimer : Control
 	private Button OptionsResetLongBreakFrequencyButton;
 	private LineEdit OptionsLongBreakFrequencyLineEdit;
 
+	private List<CanvasItem> FadeableInterfaceCanvasItems = new List<CanvasItem>();
+
 	private UserPreferences userPreferences;
 	private UserPreferences defaultUserPreferences;
 	#endregion
@@ -140,6 +148,11 @@ public class PomoTimer : Control
 	private bool timerActive;
 	private bool freshSessionAndShouldPlaySfxOnPlay;
 	private int workPhasesSinceLongBreak;
+	
+	// Interface Fading
+	private float currentSecondsBeforeInterfaceFade;
+	private bool interfaceShouldFade;
+	private float interfaceAlphaPercentage;
 	#endregion
 
 	/// <summary>
@@ -196,6 +209,11 @@ public class PomoTimer : Control
 		OptionsResetLongBreakFrequencyButton = GetNode<Button>(OptionsResetLongBreakFrequencyButtonNodePath);
 		OptionsLongBreakFrequencyLineEdit = GetNode<LineEdit>(OptionsLongBreakFrequencyLineEditNodePath);
 		OptionsLongBreakFrequencyLineEdit.Text = userPreferences.LongBreakFrequency.ToString();
+
+		foreach (var fadeableInterfaceCanvasItemNodePath in FadeableInterfaceCanvasItemNodePaths)
+		{
+			FadeableInterfaceCanvasItems.Add(GetNode<CanvasItem>(fadeableInterfaceCanvasItemNodePath));
+		}
 
 		AudioStreamPlayer = GetNode<AudioStreamPlayer>(AudioStreamPlayerNodePath);
 		OptionsResetSfxVolumeButton = GetNode<Button>(OptionsResetSfxVolumeButtonNodePath);
@@ -275,6 +293,8 @@ public class PomoTimer : Control
 				CloseOptionsPopup();
 			}
 		}
+		
+		UpdateInterfaceFade(delta);
 	}
 
 	/// <summary>
@@ -340,6 +360,69 @@ public class PomoTimer : Control
 
 		OptionsTimerUpperColorPickerTextureRect.Modulate = userPreferences.UpperTimerColor;
 		OptionsTimerLowerColorPickerTextureRect.Modulate = userPreferences.LowerTimerColor;
+	}
+
+	/// <summary>
+	/// Update the interface fading.
+	/// </summary>
+	/// <param name="deltaTime">Delta time.</param>
+	private void UpdateInterfaceFade(float deltaTime)
+	{
+		if (!timerActive)
+		{
+			interfaceShouldFade = false;
+			currentSecondsBeforeInterfaceFade = SecondsBeforeInterfaceFade;
+			interfaceAlphaPercentage = 1.0f;
+		}
+		else
+		{
+			if (!interfaceShouldFade)
+			{
+				currentSecondsBeforeInterfaceFade -= deltaTime;
+
+				if (currentSecondsBeforeInterfaceFade < 0.0f)
+				{
+					interfaceShouldFade = true;
+				}
+			}
+			else
+			{
+				float newInterfaceAlphaPercentage = interfaceAlphaPercentage - (deltaTime / InterfaceFadeDuration);
+				interfaceAlphaPercentage = Mathf.Max(newInterfaceAlphaPercentage, 0.0f);
+			}
+		}
+		
+		// Update interface visibility
+		foreach (var fadeableInterfaceCanvasItem in FadeableInterfaceCanvasItems)
+		{
+			Color color = fadeableInterfaceCanvasItem.Modulate;
+			color.a = interfaceAlphaPercentage;
+			fadeableInterfaceCanvasItem.Modulate = color;
+		}
+	}
+
+	/// <summary>
+	/// Signal Receiver Method.<br/>
+	/// For use with the main Pomo interface GUI Input signal.<br/>
+	/// Make the interface appear.
+	/// </summary>
+	private void OnPomoTimerReceivedGuiInput(InputEvent inputEvent)
+	{
+		interfaceShouldFade = false;
+		currentSecondsBeforeInterfaceFade = SecondsBeforeInterfaceFade;
+		interfaceAlphaPercentage = 1.0f;
+	}
+
+	/// <summary>
+	/// Signal Receiver Method.<br/>
+	/// For use with the main Pomo interface resized signal.<br/>
+	/// Make the interface appear.
+	/// </summary>
+	private void OnPomoTimerResized()
+	{
+		interfaceShouldFade = false;
+		currentSecondsBeforeInterfaceFade = SecondsBeforeInterfaceFade;
+		interfaceAlphaPercentage = 1.0f;
 	}
 
 	/// <summary>

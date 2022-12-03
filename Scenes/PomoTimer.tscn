@@ -854,6 +854,7 @@ tracks/2/keys = {
 [node name="PomoTimer" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 script = ExtResource( 4 )
 AudioStreamPlayerNodePath = NodePath("AudioStreamPlayer")
 TimeLabelNodePath = NodePath("TimerControls/VBoxContainer/TimeLabel")
@@ -881,6 +882,7 @@ OptionsResetLongBreakTimerDurationButtonNodePath = NodePath("OptionsPopup/Option
 OptionsLongBreakTimerDurationLineEditNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/LongBreakTimerDurationLineEdit")
 OptionsResetLongBreakFrequencyButtonNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/ResetLongBreakFrequencyButton")
 OptionsLongBreakFrequencyLineEditNodePath = NodePath("OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/LongBreakFrequencyLineEdit")
+FadeableInterfaceCanvasItemNodePaths = [ NodePath("TimerControls/VBoxContainer/HBoxContainer/PauseButton"), NodePath("TimerControls/VBoxContainer/HBoxContainer/ResetButton"), NodePath("AppControls/VBoxContainer/HBoxContainer/OptionsButton"), NodePath("AppControls/VBoxContainer/HBoxContainer/PinWindowButton") ]
 PauseTexture = ExtResource( 6 )
 PlayTexture = ExtResource( 5 )
 PinWindowTexture = ExtResource( 12 )
@@ -1083,6 +1085,7 @@ size_flags_horizontal = 3
 margin_top = 325.0
 margin_right = 480.0
 margin_bottom = 480.0
+mouse_filter = 1
 size_flags_vertical = 7
 size_flags_stretch_ratio = 0.9
 
@@ -1296,7 +1299,7 @@ follow_focus = true
 scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OptionsPopup/OptionsPopupPanel/CenterContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer"]
-margin_right = 182.0
+margin_right = 188.0
 margin_bottom = 232.0
 size_flags_horizontal = 3
 custom_constants/separation = 8
@@ -2067,6 +2070,8 @@ anims/Hide = SubResource( 25 )
 anims/RESET = SubResource( 27 )
 anims/Show = SubResource( 26 )
 
+[connection signal="gui_input" from="." to="." method="OnPomoTimerReceivedGuiInput"]
+[connection signal="resized" from="." to="." method="OnPomoTimerResized"]
 [connection signal="resized" from="." to="." method="OnViewportSizeChanged"]
 [connection signal="button_down" from="TimerControls/VBoxContainer/HBoxContainer/PauseButton" to="TimerControls/VBoxContainer/HBoxContainer/PauseButton" method="OnAnimatedTimerButtonButtonDown"]
 [connection signal="button_up" from="TimerControls/VBoxContainer/HBoxContainer/PauseButton" to="TimerControls/VBoxContainer/HBoxContainer/PauseButton" method="OnAnimatedTimerButtonButtonUp"]
