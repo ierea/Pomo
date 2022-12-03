@@ -590,6 +590,10 @@ public class PomoTimer : Control
 	private void OnSkipButtonPressed()
 	{
 		GoToNextTimerPhase();
+		
+		UpdateTimerText();
+		UpdatePhaseText();
+		UpdateTimerRectSizes();
 	}
 
 	/// <summary>
