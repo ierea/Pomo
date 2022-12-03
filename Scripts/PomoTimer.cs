@@ -398,6 +398,16 @@ public class PomoTimer : Control
 			Color color = fadeableInterfaceCanvasItem.Modulate;
 			color.a = interfaceAlphaPercentage;
 			fadeableInterfaceCanvasItem.Modulate = color;
+
+			// If fully hidden, disable buttons.
+			if (interfaceAlphaPercentage <= 0.0f)
+			{
+				fadeableInterfaceCanvasItem.Visible = false;
+			}
+			else
+			{
+				fadeableInterfaceCanvasItem.Visible = true;
+			}
 		}
 	}
 
